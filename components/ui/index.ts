@@ -18,3 +18,4 @@ export { default as PickupSection } from './PickupSection';
 export { default as Categories } from './Categories';
 export { default as ShareButtons } from './ShareButtons';
 export { default as Pagination } from './Pagination';
+export { default as PlusButton } from './PlusButton';
