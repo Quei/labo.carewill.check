@@ -1,0 +1,15 @@
+.root {
+  @apply flex;
+}
+
+.item {
+  @apply cursor-pointer;
+}
+
+.item:hover {
+  @apply underline;
+}
+
+.slash {
+  @apply mx-1;
+}

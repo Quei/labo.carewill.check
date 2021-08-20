@@ -1,0 +1,70 @@
+{
+  "name": "labo.carewill.co.jp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "predev": "yarn generate",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "generate": "DOTENV_CONFIG_PATH=.env.local graphql-codegen -r dotenv/config -c"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "dependencies": {
+    "@contentful/rich-text-plain-text-renderer": "^15.1.0",
+    "@contentful/rich-text-react-renderer": "^15.1.0",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
+    "@tailwindcss/line-clamp": "^0.2.1",
+    "classnames": "^2.3.1",
+    "dayjs": "^1.10.6",
+    "next": "11.0.1",
+    "next-seo": "^4.26.0",
+    "postcss": "^8.3.6",
+    "postcss-nesting": "^8.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-intl": "^5.20.7",
+    "react-scroll": "^1.8.3",
+    "react-share": "^4.4.0",
+    "tailwindcss": "^2.2.7"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.0.1",
+    "@graphql-codegen/schema-ast": "^2.0.0",
+    "@graphql-codegen/typescript": "^2.0.0",
+    "@graphql-codegen/typescript-operations": "^2.0.1",
+    "@next/bundle-analyzer": "^11.0.1",
+    "@tailwindcss/jit": "^0.1.18",
+    "@types/classnames": "^2.3.1",
+    "@types/node": "^16.4.13",
+    "@types/react": "17.0.17",
+    "@types/react-scroll": "^1.8.3",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.0.1",
+    "graphql": "^15.5.1",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.3.2",
+    "typescript": "4.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.{md,mdx,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

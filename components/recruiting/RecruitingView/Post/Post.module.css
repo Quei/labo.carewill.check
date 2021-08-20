@@ -1,0 +1,60 @@
+.root {
+  padding-bottom: 100px;
+}
+
+.content {
+  margin-top: 50px;
+  @screen md {
+    margin-top: 20px;
+  }
+  & p {
+    @apply text-sm;
+    & b {
+      @apply text-base;
+    }
+  }
+  & h2 {
+    @apply text-base md:text-2xl;
+  }
+  & > *:not(h2) + * {
+    margin-top: 1.5em;
+  }
+
+  &.membership {
+    & :global(.image-wrapper) {
+      @apply text-center;
+      & img {
+        width: 350px;
+      }
+    }
+  }
+}
+
+.formLink {
+  @apply text-2xl text-center;
+  margin-top: 70px;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  @screen md {
+    margin-top: 100px;
+  }
+  & a {
+    @apply leading-none hover:text-white hover:bg-green;
+    border: theme('borderWidth.DEFAULT') solid currentColor;
+    padding-top: 0.1em;
+    padding-bottom: 0.2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+}
+
+.notes {
+  @apply text-base;
+  margin-top: 60px;
+  & > * + * {
+    margin-top: 1.5em;
+  }
+  & a {
+    @apply underline hover:no-underline;
+  }
+}

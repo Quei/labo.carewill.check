@@ -1,0 +1,31 @@
+.header {
+  @apply relative text-base leading-normal md:text-2xl md:leading-normal;
+}
+
+.title {
+  margin-top: 20px;
+  @screen md {
+    margin-top: 0;
+  }
+}
+
+.image {
+  @apply relative;
+  margin-top: 30px;
+}
+
+.content {
+  @apply text-sm;
+  margin-top: 50px;
+  & > * + * {
+    margin-top: 1.5em;
+  }
+}
+
+.categoryList {
+  @apply flex text-sm;
+  margin-top: 60px;
+  & > * + * {
+    margin-left: 1em;
+  }
+}

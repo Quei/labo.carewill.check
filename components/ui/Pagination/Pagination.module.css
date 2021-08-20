@@ -1,0 +1,52 @@
+.root {
+  @apply flex justify-between;
+  margin-top: 70px;
+  & > li {
+    flex:0 0 33%;
+  }
+}
+
+.next,
+.previous {
+  & a {
+    @apply line-clamp-1 relative;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.35em;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      border: 2px solid currentColor;
+      border-top: none;
+    }
+  }
+}
+
+.next {
+  @apply text-left;
+  & a {
+    padding-left: 1.2em;
+    &::before {
+      left: 0;
+      border-right: none;
+      transform: translateX(5px) rotate(45deg);
+    }
+  }
+}
+
+.index {
+  @apply text-center;
+}
+
+.previous {
+  @apply text-right;
+  & a {
+    padding-right: 1.2em;
+    &::before {
+      right: 0;
+      border-left: none;
+      transform: translateX(-5px) rotate(-45deg);
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Carewill Labo",
+  "titleTemplate": "%s - Carewill Labo",
+  "description": "Carewill Labo",
+  "openGraph": {
+    "title": "Carewill Labo",
+    "description": "Carewill Labo",
+    "type": "website",
+    "locale": "ja",
+    "url": "https://labo.carewill.co.jp",
+    "site_name": "Carewill Labo",
+    "images": [
+      {
+        "url": "/card.png",
+        "width": 800,
+        "height": 600,
+        "alt": "Carewill Labo"
+      }
+    ]
+  },
+  "twitter": {
+    "handle": "@carewill",
+    "site": "@carewill",
+    "cardType": "summary_large_image"
+  }
+}

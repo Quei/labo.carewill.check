@@ -1,0 +1,16 @@
+.posts {
+  padding-bottom: 70px;
+  & > * + * {
+    margin-top: 60px;
+  }
+}
+
+.moreButton {
+  @apply text-2xl;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  &::before {
+    content: '+';
+    margin-right: 0.5em;
+  }
+}

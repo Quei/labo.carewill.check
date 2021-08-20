@@ -1,0 +1,125 @@
+import cn from 'classnames';
+import s from './Labo.module.css';
+import { useIntlMessage } from '@lib/hooks/useIntlMessage';
+import {
+  renderRichText,
+  renderRichTextReact,
+} from '@lib/contentful/utils/rich-text';
+import {
+  Grid,
+  Block,
+  BlockContent,
+  BlockContentPickupLarge,
+} from '@components/ui';
+import { CrossBlock } from '@components/icons';
+import { Section } from '../Section';
+import { Pickup } from './Pickup';
+import type { VFC } from 'react';
+import type {
+  HomeLaboViewFragment,
+  HomeLaboLatestStaffNoteFragment,
+} from 'types/schema';
+
+const SITE = 'labo';
+
+export type Props = HomeLaboViewFragment & {
+  className?: string;
+  latestStaffNote?: HomeLaboLatestStaffNoteFragment | null;
+};
+
+export const homeLaboViewFragment = /* GraphQL */ `
+  fragment homeLaboView on Home {
+    description {
+      json
+    }
+    staffNoteHomeDescription {
+      json
+    }
+    recruitingHomeImage {
+      url
+    }
+    recruitingHomeDescription {
+      json
+    }
+  }
+  fragment homeLaboLatestStaffNote on StaffNote {
+    content {
+      json
+    }
+  }
+`;
+
+const Labo: VFC<Props> = ({
+  className,
+  description,
+  staffNoteHomeDescription,
+  recruitingHomeImage,
+  recruitingHomeDescription,
+  latestStaffNote,
+}) => {
+  const f = useIntlMessage();
+  return (
+    <Section
+      className={cn(s.root)}
+      title={'Labo'}
+      description={renderRichTextReact(description)}
+    >
+      <Grid>
+        <Block title={f('labo.interviews')} titleTag="h3">
+          {/*
+          TODO:
+          interviewsが確定してからCMSに移行する
+          */}
+          <BlockContent
+            image={{
+              src: '/interviews_preview.jpg',
+              alt: f('labo.interviews'),
+            }}
+          >
+            carewill に寄せられた声から生まれたプロジェ
+            クトや、パートナーシップから生まれた挑戦を 連載しています。carewill
+            に寄せられた声から 生まれたプロジェクトや、パートナーシップか
+          </BlockContent>
+          <CrossBlock className="absolute top-0 left-0" />
+        </Block>
+        <Block
+          title={f('labo.staffNotes')}
+          titleTag="h3"
+          href="/staff-notes"
+          site={SITE}
+        >
+          <BlockContent
+            image={{
+              node: (
+                <div className={cn(s.staffNoteImageTexts)}>
+                  <p>{renderRichText(latestStaffNote?.content)}</p>
+                </div>
+              ),
+            }}
+          >
+            {renderRichTextReact(staffNoteHomeDescription)}
+          </BlockContent>
+        </Block>
+      </Grid>
+      {/* <Pickup title={f('labo.interviewsPickup')} site={SITE} /> */}
+      <section>
+        <Block
+          title={f('labo.recruiting')}
+          titleTag="h3"
+          href="/recruiting/partnership"
+          site={SITE}
+        >
+          <BlockContentPickupLarge
+            imageSrc={recruitingHomeImage?.url}
+            imageAlt={f('labo.recruiting')}
+            isImageLayoutCenter={true}
+          >
+            {renderRichTextReact(recruitingHomeDescription)}
+          </BlockContentPickupLarge>
+        </Block>
+      </section>
+    </Section>
+  );
+};
+
+export default Labo;
