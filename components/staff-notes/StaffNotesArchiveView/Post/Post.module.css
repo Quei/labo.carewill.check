@@ -12,7 +12,7 @@
   }
 }
 .imageWrapper {
-  @apply relative bg-gray md:absolute md:bottom-0;
+  @apply relative bg-light-gray md:absolute md:bottom-0;
   width: 130px;
   height: 130px;
   margin-top: 20px;
