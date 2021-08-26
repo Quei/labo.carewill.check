@@ -42,6 +42,7 @@ const Post: VFC<Props> = ({ className, slug, title, date, content, image }) => {
             <Image
               src={image.url}
               layout="fill"
+              objectFit="cover"
               alt={image.description ?? title ?? ''}
             />
           )}

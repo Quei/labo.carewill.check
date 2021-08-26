@@ -11,6 +11,7 @@ import {
   Container,
   Categories,
   useUI,
+  MorePostsButton,
 } from '@components/ui';
 import { Post, staffNotesArchiveViewPostFragment } from './Post';
 import type { VFC } from 'react';
@@ -138,13 +139,7 @@ const StaffNotesArchiveView: VFC<Props> = ({
           )}
         </Container>
       </Block>
-      {hasMorePosts && (
-        <div className={cn('text-center')}>
-          <button className={cn(s.moreButton)} onClick={handleOnClickMorePosts}>
-            {f('morePosts')}
-          </button>
-        </div>
-      )}
+      {hasMorePosts && <MorePostsButton onClick={handleOnClickMorePosts} />}
     </>
   );
 };

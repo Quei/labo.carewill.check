@@ -32,16 +32,25 @@ export const homeLaboViewFragment = /* GraphQL */ `
     description {
       json
     }
+    interviewImage {
+      url
+    }
+    interviewHomeDescription {
+      json
+    }
     staffNoteHomeDescription {
       json
     }
-    recruitingHomeImage {
+    recruitingImage {
       url
     }
     recruitingHomeDescription {
       json
     }
   }
+`;
+
+export const homeLaboLatestStaffNoteFragment = /* GraphQL */ `
   fragment homeLaboLatestStaffNote on StaffNote {
     content {
       json
@@ -52,8 +61,10 @@ export const homeLaboViewFragment = /* GraphQL */ `
 const Labo: VFC<Props> = ({
   className,
   description,
+  interviewImage,
+  interviewHomeDescription,
   staffNoteHomeDescription,
-  recruitingHomeImage,
+  recruitingImage,
   recruitingHomeDescription,
   latestStaffNote,
 }) => {
@@ -65,23 +76,16 @@ const Labo: VFC<Props> = ({
       description={renderRichTextReact(description)}
     >
       <Grid>
-        <Block title={f('labo.interviews')} titleTag="h3">
-          {/*
-          TODO:
-          interviewsが確定してからCMSに移行する
-          */}
-          <BlockContent
-            image={{
-              src: '/interviews_preview.jpg',
-              alt: f('labo.interviews'),
-            }}
-          >
-            carewill に寄せられた声から生まれたプロジェ
-            クトや、パートナーシップから生まれた挑戦を 連載しています。carewill
-            に寄せられた声から 生まれたプロジェクトや、パートナーシップか
-          </BlockContent>
-          <CrossBlock className="absolute top-0 left-0" />
-        </Block>
+        {interviewImage && interviewHomeDescription && (
+          <Block title={f('labo.interviews')} titleTag="h3">
+            <BlockContent
+              image={{ src: interviewImage.url, alt: f('store.product') }}
+            >
+              {renderRichTextReact(interviewHomeDescription)}
+            </BlockContent>
+            <CrossBlock className="absolute top-0 left-0" />
+          </Block>
+        )}
         <Block
           title={f('labo.staffNotes')}
           titleTag="h3"
@@ -110,7 +114,7 @@ const Labo: VFC<Props> = ({
           site={SITE}
         >
           <BlockContentPickupLarge
-            imageSrc={recruitingHomeImage?.url}
+            imageSrc={recruitingImage?.url}
             imageAlt={f('labo.recruiting')}
             isImageLayoutCenter={true}
           >

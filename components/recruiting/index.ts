@@ -2,4 +2,7 @@ export {
   default as RecruitingView,
   recruitingViewDescriptionFragment,
 } from './RecruitingView';
-export { recruitingViewPostFragment } from './RecruitingView/Post';
+export {
+  recruitingViewPostFragment,
+  recruitingViewCategoriesFragment,
+} from './RecruitingView/Post';

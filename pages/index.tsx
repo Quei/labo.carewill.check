@@ -1,6 +1,10 @@
-import { fetcher, getAllNavigations } from '@lib/contentful';
+import { fetcher, getAllNavigations, getFooter } from '@lib/contentful';
 import { Layout } from '@components/common';
-import { HomeView, homeLaboViewFragment } from '@components/home';
+import {
+  HomeView,
+  homeLaboViewFragment,
+  homeLaboLatestStaffNoteFragment,
+} from '@components/home';
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import type { GetHomeLaboQuery } from 'types/schema';
 
@@ -33,6 +37,7 @@ const getHomeLaboQuery = /* GraphQL */ `
   }
 
   ${homeLaboViewFragment}
+  ${homeLaboLatestStaffNoteFragment}
 `;
 
 export async function getStaticProps({
@@ -51,9 +56,11 @@ export async function getStaticProps({
     site: 'labo',
   });
   const allNavigationsPromise = getAllNavigations({ locale, preview });
-  const [laboData, allNavigations] = await Promise.all([
+  const footerPromise = getFooter({ locale, preview });
+  const [laboData, allNavigations, footerData] = await Promise.all([
     laboPromise,
     allNavigationsPromise,
+    footerPromise,
   ]);
   const labo = laboData?.homeCollection?.items?.[0];
   const latestStaffNote = laboData?.staffNoteCollection?.items?.[0];
@@ -62,6 +69,7 @@ export async function getStaticProps({
     props: {
       labo: { ...labo, latestStaffNote },
       allNavigations,
+      footer: footerData.footer,
       isSiteRoot: true,
     },
     // revalidate: 14400,

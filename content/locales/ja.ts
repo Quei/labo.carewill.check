@@ -1,10 +1,5 @@
 export const ja: Record<string, any> = {
-  product: 'プロダクト',
-  customOrder: 'カスタムオーダー',
-  collaboration: 'コラボレーション',
-  hauteCouture: 'オートクチュール',
-  form: '入力フォーム',
-  formLink: '入力フォームはこちら',
+  carewill: '株式会社ケアウィル',
   pdfLink: 'PDFはこちら',
   relatedPosts: '関連記事',
   addToCart: 'カートに入れる',
@@ -14,8 +9,16 @@ export const ja: Record<string, any> = {
   all: 'すべて',
   morePosts: 'もっと見る',
   index: '一覧',
-  // haute-couture
+  makuakeLink: 'Makuakeへ',
+  // store
+  ['store.product']: 'プロダクト',
+  ['store.customOrder']: 'カスタムオーダー',
+  ['store.collaboration']: 'コラボレーション',
+  ['store.hauteCouture']: 'オートクチュール',
   // form
+  // haute-couture
+  form: '入力フォーム',
+  formLink: '入力フォームはこちら',
   ['form.change']: '変更',
   ['form.empty']: '未入力',
   ['form.submit']: '送信',
@@ -35,4 +38,6 @@ export const ja: Record<string, any> = {
   ['labo.selectCategory']: 'カテゴリーから選ぶ',
   // about
   ['about.newsPickup']: 'ニュースピックアップ',
+  ['about.tokushoho']: '特定商取引',
+  ['about.privacyPolicy']: 'プライバシーポリシー',
 };

@@ -2,6 +2,7 @@ import {
   fetcher,
   getAllNavigations,
   getSiblingsStaffNotes,
+  getFooter,
 } from '@lib/contentful';
 import { Layout } from '@components/common';
 import {
@@ -67,9 +68,11 @@ export async function getStaticProps({
     site: 'labo',
   });
   const allNavigationsPromise = getAllNavigations({ locale, preview });
-  const [data, allNavigations] = await Promise.all([
+  const footerPromise = getFooter({ locale, preview });
+  const [data, allNavigations, footerData] = await Promise.all([
     promise,
     allNavigationsPromise,
+    footerPromise,
   ]);
 
   const post = data?.staffNoteCollection?.items?.[0];
@@ -89,7 +92,7 @@ export async function getStaticProps({
   }
 
   return {
-    props: { post, siblingsPosts, allNavigations },
+    props: { post, siblingsPosts, allNavigations, footer: footerData.footer },
     revalidate: 60 * 60, // Every hour
   };
 }

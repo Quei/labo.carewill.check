@@ -92,12 +92,24 @@ input AssetFilter {
 }
 
 type AssetLinkingCollections {
+  customOrderCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): CustomOrderCollection
   entryCollection(
     limit: Int = 100
     locale: String
     preview: Boolean
     skip: Int = 0
   ): EntryCollection
+  footerCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): FooterCollection
   hauteCoutureCollection(
     skip: Int = 0
     limit: Int = 100
@@ -110,6 +122,12 @@ type AssetLinkingCollections {
     preview: Boolean
     skip: Int = 0
   ): HomeCollection
+  productCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): ProductCollection
   staffNoteCollection(
     skip: Int = 0
     limit: Int = 100
@@ -256,6 +274,18 @@ type CustomOrder implements Entry {
   title(locale: String): String
   slug(locale: String): String
   description(locale: String): CustomOrderDescription
+  imageCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): AssetCollection
+  mobileImageCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): AssetCollection
 }
 
 type CustomOrderCollection {
@@ -306,6 +336,8 @@ input CustomOrderFilter {
   description_exists: Boolean
   description_contains: String
   description_not_contains: String
+  imageCollection_exists: Boolean
+  mobileImageCollection_exists: Boolean
   OR: [CustomOrderFilter]
   AND: [CustomOrderFilter]
 }
@@ -373,6 +405,84 @@ enum EntryOrder {
   sys_id_DESC
   sys_publishedAt_ASC
   sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/footer)
+"""
+type Footer implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): FooterLinkingCollections
+  slug(locale: String): String
+  title(locale: String): String
+  content(locale: String): String
+  logoCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): AssetCollection
+}
+
+type FooterCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Footer]!
+}
+
+input FooterFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  content_exists: Boolean
+  content: String
+  content_not: String
+  content_in: [String]
+  content_not_in: [String]
+  content_contains: String
+  content_not_contains: String
+  logoCollection_exists: Boolean
+  OR: [FooterFilter]
+  AND: [FooterFilter]
+}
+
+type FooterLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+enum FooterOrder {
+  slug_ASC
+  slug_DESC
+  title_ASC
+  title_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
 }
@@ -511,14 +621,22 @@ scalar HexColor
 [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home)
 """
 type Home implements Entry {
-  collaborationDescription(locale: String): HomeCollaborationDescription
+  collaborationHomeDescription(locale: String): HomeCollaborationHomeDescription
   collaborationImage(preview: Boolean, locale: String): Asset
   contentfulMetadata: ContentfulMetadata!
-  customOrderDescription(locale: String): HomeCustomOrderDescription
+  customOrderHomeDescription(locale: String): HomeCustomOrderHomeDescription
   customOrderImage(preview: Boolean, locale: String): Asset
   description(locale: String): HomeDescription
-  hauteCoutureDescription(locale: String): HomeHauteCoutureDescription
+  endSlideCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): AssetCollection
+  hauteCoutureHomeDescription(locale: String): HomeHauteCoutureHomeDescription
   hauteCoutureImage(preview: Boolean, locale: String): Asset
+  interviewHomeDescription(locale: String): HomeInterviewHomeDescription
+  interviewImage(preview: Boolean, locale: String): Asset
   linkedFrom(allowedLocales: [String]): HomeLinkingCollections
   newsPickupCollection(
     skip: Int = 0
@@ -527,36 +645,43 @@ type Home implements Entry {
     locale: String
   ): HomeNewsPickupCollection
   productDescription(locale: String): HomeProductDescription
+  productHomeDescription(locale: String): HomeProductHomeDescription
   productImage(preview: Boolean, locale: String): Asset
   recruitingDescription(locale: String): HomeRecruitingDescription
   recruitingHomeDescription(locale: String): HomeRecruitingHomeDescription
-  recruitingHomeImage(preview: Boolean, locale: String): Asset
+  recruitingImage(preview: Boolean, locale: String): Asset
   slug(locale: String): String
   staffNoteDescription(locale: String): HomeStaffNoteDescription
   staffNoteHomeDescription(locale: String): HomeStaffNoteHomeDescription
   sys: Sys!
   title(locale: String): String
+  topSlideCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): AssetCollection
 }
 
-type HomeCollaborationDescription {
+type HomeCollaborationHomeDescription {
   json: JSON!
-  links: HomeCollaborationDescriptionLinks!
+  links: HomeCollaborationHomeDescriptionLinks!
 }
 
-type HomeCollaborationDescriptionAssets {
+type HomeCollaborationHomeDescriptionAssets {
   hyperlink: [Asset]!
   block: [Asset]!
 }
 
-type HomeCollaborationDescriptionEntries {
+type HomeCollaborationHomeDescriptionEntries {
   inline: [Entry]!
   hyperlink: [Entry]!
   block: [Entry]!
 }
 
-type HomeCollaborationDescriptionLinks {
-  entries: HomeCollaborationDescriptionEntries!
-  assets: HomeCollaborationDescriptionAssets!
+type HomeCollaborationHomeDescriptionLinks {
+  entries: HomeCollaborationHomeDescriptionEntries!
+  assets: HomeCollaborationHomeDescriptionAssets!
 }
 
 type HomeCollection {
@@ -566,25 +691,25 @@ type HomeCollection {
   total: Int!
 }
 
-type HomeCustomOrderDescription {
+type HomeCustomOrderHomeDescription {
   json: JSON!
-  links: HomeCustomOrderDescriptionLinks!
+  links: HomeCustomOrderHomeDescriptionLinks!
 }
 
-type HomeCustomOrderDescriptionAssets {
+type HomeCustomOrderHomeDescriptionAssets {
   hyperlink: [Asset]!
   block: [Asset]!
 }
 
-type HomeCustomOrderDescriptionEntries {
+type HomeCustomOrderHomeDescriptionEntries {
   inline: [Entry]!
   hyperlink: [Entry]!
   block: [Entry]!
 }
 
-type HomeCustomOrderDescriptionLinks {
-  entries: HomeCustomOrderDescriptionEntries!
-  assets: HomeCustomOrderDescriptionAssets!
+type HomeCustomOrderHomeDescriptionLinks {
+  entries: HomeCustomOrderHomeDescriptionEntries!
+  assets: HomeCustomOrderHomeDescriptionAssets!
 }
 
 type HomeDescription {
@@ -611,26 +736,34 @@ type HomeDescriptionLinks {
 input HomeFilter {
   AND: [HomeFilter]
   OR: [HomeFilter]
-  collaborationDescription_contains: String
-  collaborationDescription_exists: Boolean
-  collaborationDescription_not_contains: String
+  collaborationHomeDescription_contains: String
+  collaborationHomeDescription_exists: Boolean
+  collaborationHomeDescription_not_contains: String
   collaborationImage_exists: Boolean
   contentfulMetadata: ContentfulMetadataFilter
-  customOrderDescription_contains: String
-  customOrderDescription_exists: Boolean
-  customOrderDescription_not_contains: String
+  customOrderHomeDescription_contains: String
+  customOrderHomeDescription_exists: Boolean
+  customOrderHomeDescription_not_contains: String
   customOrderImage_exists: Boolean
   description_contains: String
   description_exists: Boolean
   description_not_contains: String
-  hauteCoutureDescription_contains: String
-  hauteCoutureDescription_exists: Boolean
-  hauteCoutureDescription_not_contains: String
+  endSlideCollection_exists: Boolean
+  hauteCoutureHomeDescription_contains: String
+  hauteCoutureHomeDescription_exists: Boolean
+  hauteCoutureHomeDescription_not_contains: String
   hauteCoutureImage_exists: Boolean
+  interviewHomeDescription_contains: String
+  interviewHomeDescription_exists: Boolean
+  interviewHomeDescription_not_contains: String
+  interviewImage_exists: Boolean
   newsPickupCollection_exists: Boolean
   productDescription_contains: String
   productDescription_exists: Boolean
   productDescription_not_contains: String
+  productHomeDescription_contains: String
+  productHomeDescription_exists: Boolean
+  productHomeDescription_not_contains: String
   productImage_exists: Boolean
   recruitingDescription_contains: String
   recruitingDescription_exists: Boolean
@@ -638,7 +771,7 @@ input HomeFilter {
   recruitingHomeDescription_contains: String
   recruitingHomeDescription_exists: Boolean
   recruitingHomeDescription_not_contains: String
-  recruitingHomeImage_exists: Boolean
+  recruitingImage_exists: Boolean
   slug: String
   slug_contains: String
   slug_exists: Boolean
@@ -660,27 +793,49 @@ input HomeFilter {
   title_not: String
   title_not_contains: String
   title_not_in: [String]
+  topSlideCollection_exists: Boolean
 }
 
-type HomeHauteCoutureDescription {
+type HomeHauteCoutureHomeDescription {
   json: JSON!
-  links: HomeHauteCoutureDescriptionLinks!
+  links: HomeHauteCoutureHomeDescriptionLinks!
 }
 
-type HomeHauteCoutureDescriptionAssets {
+type HomeHauteCoutureHomeDescriptionAssets {
   hyperlink: [Asset]!
   block: [Asset]!
 }
 
-type HomeHauteCoutureDescriptionEntries {
+type HomeHauteCoutureHomeDescriptionEntries {
   inline: [Entry]!
   hyperlink: [Entry]!
   block: [Entry]!
 }
 
-type HomeHauteCoutureDescriptionLinks {
-  entries: HomeHauteCoutureDescriptionEntries!
-  assets: HomeHauteCoutureDescriptionAssets!
+type HomeHauteCoutureHomeDescriptionLinks {
+  entries: HomeHauteCoutureHomeDescriptionEntries!
+  assets: HomeHauteCoutureHomeDescriptionAssets!
+}
+
+type HomeInterviewHomeDescription {
+  json: JSON!
+  links: HomeInterviewHomeDescriptionLinks!
+}
+
+type HomeInterviewHomeDescriptionAssets {
+  hyperlink: [Asset]!
+  block: [Asset]!
+}
+
+type HomeInterviewHomeDescriptionEntries {
+  inline: [Entry]!
+  hyperlink: [Entry]!
+  block: [Entry]!
+}
+
+type HomeInterviewHomeDescriptionLinks {
+  entries: HomeInterviewHomeDescriptionEntries!
+  assets: HomeInterviewHomeDescriptionAssets!
 }
 
 type HomeLinkingCollections {
@@ -733,6 +888,27 @@ type HomeProductDescriptionEntries {
 type HomeProductDescriptionLinks {
   entries: HomeProductDescriptionEntries!
   assets: HomeProductDescriptionAssets!
+}
+
+type HomeProductHomeDescription {
+  json: JSON!
+  links: HomeProductHomeDescriptionLinks!
+}
+
+type HomeProductHomeDescriptionAssets {
+  hyperlink: [Asset]!
+  block: [Asset]!
+}
+
+type HomeProductHomeDescriptionEntries {
+  inline: [Entry]!
+  hyperlink: [Entry]!
+  block: [Entry]!
+}
+
+type HomeProductHomeDescriptionLinks {
+  entries: HomeProductHomeDescriptionEntries!
+  assets: HomeProductHomeDescriptionAssets!
 }
 
 type HomeRecruitingDescription {
@@ -1244,6 +1420,14 @@ type Product implements Entry {
   linkedFrom(allowedLocales: [String]): ProductLinkingCollections
   title(locale: String): String
   slug(locale: String): String
+  date(locale: String): DateTime
+  description(locale: String): String
+  imageCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): AssetCollection
 }
 
 type ProductCollection {
@@ -1270,6 +1454,23 @@ input ProductFilter {
   slug_not_in: [String]
   slug_contains: String
   slug_not_contains: String
+  date_exists: Boolean
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime]
+  date_not_in: [DateTime]
+  date_gt: DateTime
+  date_gte: DateTime
+  date_lt: DateTime
+  date_lte: DateTime
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  imageCollection_exists: Boolean
   OR: [ProductFilter]
   AND: [ProductFilter]
 }
@@ -1288,6 +1489,8 @@ enum ProductOrder {
   title_DESC
   slug_ASC
   slug_DESC
+  date_ASC
+  date_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC
@@ -1339,6 +1542,15 @@ type Query {
     skip: Int = 0
     where: EntryFilter
   ): EntryCollection
+  footer(id: String!, preview: Boolean, locale: String): Footer
+  footerCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: FooterFilter
+    order: [FooterOrder]
+  ): FooterCollection
   hauteCouture(id: String!, preview: Boolean, locale: String): HauteCouture
   hauteCoutureCollection(
     skip: Int = 0

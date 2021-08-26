@@ -57,4 +57,7 @@
   & a {
     @apply underline hover:no-underline;
   }
+  & :global(.image-wrapper) {
+    max-width: 250px;
+  }
 }

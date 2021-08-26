@@ -4,3 +4,5 @@ export { default as SiteHeader } from './SiteHeader';
 export { default as Searchbar } from './Searchbar';
 export { default as Head } from './Head';
 export { default as I18nWidget } from './I18nWidget';
+export { default as SiteHeaderNavigation } from './SiteHeaderNavigation';
+export { default as SiteMenuList } from './SiteMenuList';
