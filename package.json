@@ -17,6 +17,7 @@
     "@contentful/rich-text-plain-text-renderer": "^15.1.0",
     "@contentful/rich-text-react-renderer": "^15.1.0",
     "@n8tb1t/use-scroll-position": "^2.0.3",
+    "@react-hook/media-query": "^1.1.1",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/line-clamp": "^0.2.1",
     "body-scroll-lock": "^4.0.0-beta.0",
