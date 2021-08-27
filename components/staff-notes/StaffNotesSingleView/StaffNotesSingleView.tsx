@@ -81,7 +81,15 @@ const StaffNotesSingleView: VFC<Props> = ({ post, siblingsPosts }) => {
   return (
     <Block title={f('labo.staffNotes')} titleTag={'p'}>
       <BlockContentChildPage>
-        <div className={cn(s.header)}>
+        <div
+          className={cn(
+            'relative',
+            'text-base',
+            'leading-normal',
+            'md:text-2xl',
+            'md:leading-normal'
+          )}
+        >
           <ShareButtons
             className={cn('absolute', 'top-0', 'right-0')}
             title={title}
@@ -94,7 +102,7 @@ const StaffNotesSingleView: VFC<Props> = ({ post, siblingsPosts }) => {
           {title && <h1 className={cn(s.title)}>{title}</h1>}
         </div>
         {image?.url && image?.width && image?.height && (
-          <div className={cn(s.image)}>
+          <div className={cn('relative', s.image)}>
             <Image
               src={image.url}
               alt={image?.description ?? title ?? ''}
@@ -105,10 +113,14 @@ const StaffNotesSingleView: VFC<Props> = ({ post, siblingsPosts }) => {
           </div>
         )}
         {content && (
-          <div className={cn(s.content)}>{renderRichTextReact(content)}</div>
+          <div className={cn('text-sm', s.content)}>
+            {renderRichTextReact(content)}
+          </div>
         )}
         {categoryCollection?.items?.length !== 0 && (
-          <ul className={cn(s.categoryList)}>
+          <ul
+            className={cn('text-sm', 'flex', 'flex-wrap', 'gap-x-4', 'mt-14')}
+          >
             {categoryCollection?.items.map((item) => {
               if (!item?.slug || !item?.title) {
                 return null;
