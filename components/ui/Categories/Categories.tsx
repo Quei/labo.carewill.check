@@ -44,44 +44,83 @@ const Categories: VFC<Props> = ({
   const { hasShown, setHasShown } = useHasShown();
   return (
     <div className={cn(className)}>
-      <div className={cn('flex', 'justify-center', 'relative')}>
-        <button
-          className={cn(s.button, { [s.hasShown]: hasShown })}
-          aria-pressed={hasShown}
-          aria-expanded={hasShown}
-          aria-controls={'category-list'}
-          onClick={() => setHasShown((value) => !value)}
-        >
-          {label}
-        </button>
-        <ul
-          id="category-list"
-          className={cn(s.list, { ['hidden']: !hasShown })}
-          aria-hidden={!hasShown}
-        >
-          {toAllLink && (
-            <li>
-              <Link href={toAllLink} hasBorderEffect={true}>
-                {f('all')}
-              </Link>
-            </li>
+      {items && items.length > 1 && (
+        <div
+          className={cn(
+            'flex',
+            'justify-center',
+            'relative',
+            'border-b',
+            'border-green'
           )}
-          {items?.map((item) => {
-            const { sys, title, slug } = item;
-            if (!title || !slug) {
-              return null;
-            }
-            return (
-              <li key={sys.id}>
-                <Link href={`/${basePath}${slug}`} hasBorderEffect={true}>
-                  {title}
+        >
+          <button
+            className={cn(
+              'text-base',
+              'md:text-2xl',
+              'leading-none',
+              s.button,
+              { [s.hasShown]: hasShown }
+            )}
+            aria-pressed={hasShown}
+            aria-expanded={hasShown}
+            aria-controls={'category-list'}
+            onClick={() => setHasShown((value) => !value)}
+          >
+            {label}
+          </button>
+          <ul
+            id="category-list"
+            className={cn(
+              'absolute',
+              'z-10',
+              'left-0',
+              'bottom-0',
+              'w-full',
+              'bg-white',
+              'text-base',
+              'text-center',
+              s.list,
+              { ['hidden']: !hasShown }
+            )}
+            aria-hidden={!hasShown}
+          >
+            {toAllLink && (
+              <li>
+                <Link href={toAllLink} hasBorderEffect={true}>
+                  {f('all')}
                 </Link>
               </li>
-            );
-          })}
-        </ul>
-      </div>
-      {title && <TitleTag className={cn(s.title)}>#{title}</TitleTag>}
+            )}
+            {items?.map((item) => {
+              const { sys, title, slug } = item;
+              if (!title || !slug) {
+                return null;
+              }
+              return (
+                <li key={sys.id}>
+                  <Link href={`/${basePath}${slug}`} hasBorderEffect={true}>
+                    {title}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+      {title && (
+        <TitleTag
+          className={cn(
+            'pt-7',
+            'text-center',
+            'text-base',
+            'md:text-2xl',
+            s.title
+          )}
+        >
+          #{title}
+        </TitleTag>
+      )}
     </div>
   );
 };

@@ -27,6 +27,8 @@ export const ja: Record<string, any> = {
   ['form.select']: '選択する',
   ['form.error.messageBlock']: '※以下の必須項目が選択 / 入力されていません。',
   ['form.error.required']: '必須項目です',
+  ['form.error.required.email']: '半角英数字・記号で入力してください',
+  ['form.error.required.acceptance']: 'チェックしてください',
   ['form.measurement.attention']: '※ご希望の「服」の着丈',
   ['form.other']: 'その他',
   ['form.other.placeholder']: 'その他の回答を入力',

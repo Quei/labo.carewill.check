@@ -111,6 +111,15 @@ a {
   animation-name: fadeIn;
 }
 
+input {
+  border-radius: 0;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
 @-webkit-keyframes fadeIn {
   from {
     opacity: 0;
