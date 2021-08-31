@@ -36,17 +36,30 @@ const Post: VFC<Props> = ({ className, slug, title, date, content, image }) => {
         {title && (
           <h2 className={cn('line-clamp-4', 'md:line-clamp-2')}>{title}</h2>
         )}
-        <div className={cn(s.content)}>{renderRichText(content)}</div>
-        <div className={cn(s.imageWrapper)}>
-          {image?.url && (
-            <Image
-              src={image.url}
-              layout="fill"
-              objectFit="cover"
-              alt={image.description ?? title ?? ''}
-            />
-          )}
-          {!image && <DefaultImage strokeWidth={1} />}
+        <div className={cn('md:flex')}>
+          <div className={cn('line-clamp-4', 'md:text-sm', s.content)}>
+            {renderRichText(content)}
+          </div>
+          <div
+            className={cn(
+              'relative',
+              'bg-light-gray',
+              'md:flex-grow-0',
+              'md:flex-shrink-0',
+              'md:ml-3',
+              s.imageWrapper
+            )}
+          >
+            {image?.url && (
+              <Image
+                src={image.url}
+                layout="fill"
+                objectFit="cover"
+                alt={image.description ?? title ?? ''}
+              />
+            )}
+            {!image && <DefaultImage strokeWidth={1} />}
+          </div>
         </div>
       </Link>
     </article>

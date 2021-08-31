@@ -5,6 +5,7 @@ import s from './StaffNotesArchiveView.module.css';
 import { nonNullableFilter } from '@lib/non-nullable-filter';
 import { useIntlMessage } from '@lib/hooks/useIntlMessage';
 import { renderRichText } from '@lib/contentful/utils/rich-text';
+import { Seo } from '@components/common';
 import {
   PageHeader,
   Block,
@@ -113,12 +114,15 @@ const StaffNotesArchiveView: VFC<Props> = ({
   }, [categories]);
   const { currentPosts, hasMorePosts } = useCurrentPosts({ posts });
   const handleOnClickMorePosts = useHandleOnClickMorePosts(posts?.length);
-
+  const title = category
+    ? `${category} - ${f('labo.staffNotes')}`
+    : f('labo.staffNotes');
+  const descriptionText = renderRichText(home?.staffNoteDescription);
   return (
     <>
+      <Seo title={title} description={descriptionText} />
       <PageHeader title={f('labo.staffNotes')} titleTag={category ? 'p' : 'h1'}>
-        {home?.staffNoteDescription &&
-          renderRichText(home.staffNoteDescription)}
+        {descriptionText}
       </PageHeader>
       <Block>
         <Container>

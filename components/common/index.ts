@@ -6,3 +6,4 @@ export { default as Head } from './Head';
 export { default as I18nWidget } from './I18nWidget';
 export { default as SiteHeaderNavigation } from './SiteHeaderNavigation';
 export { default as SiteMenuList } from './SiteMenuList';
+export { default as Seo } from './Seo';
