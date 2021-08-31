@@ -1,6 +1,4 @@
 .root {
-  @apply flex justify-between;
-  margin-top: 70px;
   & > li {
     flex:0 0 33%;
   }
@@ -24,9 +22,8 @@
 }
 
 .next {
-  @apply text-left;
   & a {
-    padding-left: 1.2em;
+    padding-left: 1.4em;
     &::before {
       left: 0;
       border-right: none;
@@ -35,14 +32,9 @@
   }
 }
 
-.index {
-  @apply text-center;
-}
-
 .previous {
-  @apply text-right;
   & a {
-    padding-right: 1.2em;
+    padding-right: 1.4em;
     &::before {
       right: 0;
       border-left: none;

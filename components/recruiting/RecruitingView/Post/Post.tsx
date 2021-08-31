@@ -53,6 +53,12 @@ export const recruitingViewPostFragment = /* GraphQL */ `
       }
     }
   }
+
+  ${richTextAssetFragment}
+  ${richTextEntryHyperlinkFragment}
+`;
+
+export const recruitingViewCategoriesFragment = /* GraphQL */ `
   fragment recruitingViewCategories on Recruiting {
     sys {
       id
@@ -60,9 +66,6 @@ export const recruitingViewPostFragment = /* GraphQL */ `
     title
     slug
   }
-
-  ${richTextAssetFragment}
-  ${richTextEntryHyperlinkFragment}
 `;
 
 const Post: VFC<Props> = ({

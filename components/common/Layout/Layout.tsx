@@ -7,17 +7,19 @@ import { SiteHeader, SiteFooter } from '@components/common';
 import { ja as localeContentJa, en as localeContentEn } from '@content/locales';
 import type { FC } from 'react';
 import type { AllNavigations } from 'types/all-navigations';
+import type { FooterFragment } from 'types/schema';
 
 interface Props {
   pageProps: {
     allNavigations: AllNavigations;
+    footer?: FooterFragment;
     isSiteRoot?: boolean;
   };
 }
 
 const Layout: FC<Props> = ({
   children,
-  pageProps: { allNavigations, isSiteRoot, ...pageProps },
+  pageProps: { allNavigations, footer, isSiteRoot, ...pageProps },
 }) => {
   const { locale = 'ja', defaultLocale } = useRouter();
   const messages = useMemo(() => {
@@ -37,7 +39,11 @@ const Layout: FC<Props> = ({
           allNavigations={allNavigations}
         />
         <main className={cn(s.main, 'fit')}>{children}</main>
-        <SiteFooter className={cn(s.footer)} allNavigations={allNavigations} />
+        <SiteFooter
+          className={cn(s.footer)}
+          allNavigations={allNavigations}
+          {...footer}
+        />
       </div>
     </IntlProvider>
   );

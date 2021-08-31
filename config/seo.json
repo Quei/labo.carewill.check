@@ -1,6 +1,7 @@
 {
   "title": "Carewill Labo",
   "titleTemplate": "%s - Carewill Labo",
+  "defaultTitle": "Carewill Labo",
   "description": "Carewill Labo",
   "openGraph": {
     "title": "Carewill Labo",
@@ -11,16 +12,16 @@
     "site_name": "Carewill Labo",
     "images": [
       {
-        "url": "/card.png",
-        "width": 800,
-        "height": 600,
+        "url": "/ogp.jpg",
+        "width": 1200,
+        "height": 630,
         "alt": "Carewill Labo"
       }
     ]
   },
   "twitter": {
-    "handle": "@carewill",
-    "site": "@carewill",
+    "handle": "@carewill_pr",
+    "site": "@carewill_pr",
     "cardType": "summary_large_image"
   }
 }

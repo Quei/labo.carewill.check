@@ -1,9 +1,10 @@
-import { fetcher, getAllNavigations } from '@lib/contentful';
+import { fetcher, getAllNavigations, getFooter } from '@lib/contentful';
 import { Layout } from '@components/common';
 import {
   RecruitingView,
   recruitingViewDescriptionFragment,
   recruitingViewPostFragment,
+  recruitingViewCategoriesFragment,
 } from '@components/recruiting';
 import type {
   GetStaticPathsContext,
@@ -53,6 +54,7 @@ const getRecruitingSingle = /* GraphQL */ `
 
   ${recruitingViewDescriptionFragment}
   ${recruitingViewPostFragment}
+  ${recruitingViewCategoriesFragment}
 `;
 
 const getRecruitingSinglePaths = /* GraphQL */ `
@@ -82,9 +84,11 @@ export async function getStaticProps({
     site: 'labo',
   });
   const allNavigationsPromise = getAllNavigations({ locale, preview });
-  const [data, allNavigations] = await Promise.all([
+  const footerPromise = getFooter({ locale, preview });
+  const [data, allNavigations, footerData] = await Promise.all([
     promise,
     allNavigationsPromise,
+    footerPromise,
   ]);
 
   const home = data?.homeCollection?.items?.[0];
@@ -100,7 +104,7 @@ export async function getStaticProps({
   }
 
   return {
-    props: { home, post, allPosts, allNavigations },
+    props: { home, post, allPosts, allNavigations, footer: footerData.footer },
     revalidate: 60 * 60, // Every hour
   };
 }

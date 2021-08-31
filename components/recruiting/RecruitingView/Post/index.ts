@@ -1,1 +1,5 @@
-export { default as Post, recruitingViewPostFragment } from './Post';
+export {
+  default as Post,
+  recruitingViewPostFragment,
+  recruitingViewCategoriesFragment,
+} from './Post';

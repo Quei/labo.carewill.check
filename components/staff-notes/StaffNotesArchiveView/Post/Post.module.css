@@ -6,20 +6,18 @@
   }
 }
 .content {
-  @apply line-clamp-4 md:text-sm;
   @screen md {
     min-height: 100px;
   }
 }
 .imageWrapper {
-  @apply relative bg-light-gray md:absolute md:bottom-0;
   width: 130px;
   height: 130px;
   margin-top: 20px;
   @screen md {
     width: 100px;
     height: 100px;
-    right: calc(50% - 50vw + theme('spacing.site-vertical-md'));
-    margin-top: 0;
+    right: 0;
+    margin-top: 5px;
   }
 }

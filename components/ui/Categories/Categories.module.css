@@ -1,5 +1,4 @@
-.button {
-  @apply text-base md:text-2xl leading-none;
+.button { 
   padding-top: 1.3em;
   padding-bottom: 1.3em;
   &.hasShown {
@@ -19,7 +18,6 @@
 }
 
 .list {
-  @apply absolute z-10 left-0 bottom-0 w-full bg-white text-base text-center;
   border: theme('borderWidth.DEFAULT') solid currentColor;
   transform: translateY(100%);
   padding-top: 10px;
@@ -29,10 +27,4 @@
   @screen md {
     max-height: 300px;
   }
-}
-
-.title {
-  @apply text-center text-base md:text-2xl;
-  border-top: theme('borderWidth.DEFAULT') solid currentColor;
-  padding-top: 1em;
 }

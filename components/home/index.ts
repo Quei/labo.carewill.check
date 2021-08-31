@@ -1,2 +1,5 @@
 export { default as HomeView } from './HomeView';
-export { homeLaboViewFragment } from './HomeView/Labo';
+export {
+  homeLaboViewFragment,
+  homeLaboLatestStaffNoteFragment,
+} from './HomeView/Labo';

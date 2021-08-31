@@ -5,12 +5,14 @@ import s from './StaffNotesArchiveView.module.css';
 import { nonNullableFilter } from '@lib/non-nullable-filter';
 import { useIntlMessage } from '@lib/hooks/useIntlMessage';
 import { renderRichText } from '@lib/contentful/utils/rich-text';
+import { Seo } from '@components/common';
 import {
   PageHeader,
   Block,
   Container,
   Categories,
   useUI,
+  MorePostsButton,
 } from '@components/ui';
 import { Post, staffNotesArchiveViewPostFragment } from './Post';
 import type { VFC } from 'react';
@@ -112,12 +114,15 @@ const StaffNotesArchiveView: VFC<Props> = ({
   }, [categories]);
   const { currentPosts, hasMorePosts } = useCurrentPosts({ posts });
   const handleOnClickMorePosts = useHandleOnClickMorePosts(posts?.length);
-
+  const title = category
+    ? `${category} - ${f('labo.staffNotes')}`
+    : f('labo.staffNotes');
+  const descriptionText = renderRichText(home?.staffNoteDescription);
   return (
     <>
+      <Seo title={title} description={descriptionText} />
       <PageHeader title={f('labo.staffNotes')} titleTag={category ? 'p' : 'h1'}>
-        {home?.staffNoteDescription &&
-          renderRichText(home.staffNoteDescription)}
+        {descriptionText}
       </PageHeader>
       <Block>
         <Container>
@@ -130,7 +135,7 @@ const StaffNotesArchiveView: VFC<Props> = ({
             titleTag={category ? 'h1' : undefined}
           />
           {currentPosts && (
-            <div className={cn(s.posts)}>
+            <div className={cn('mt-10', 'md:mt-8', s.posts)}>
               {currentPosts.map((post) => (
                 <Post key={post?.sys.id} {...post} />
               ))}
@@ -138,13 +143,7 @@ const StaffNotesArchiveView: VFC<Props> = ({
           )}
         </Container>
       </Block>
-      {hasMorePosts && (
-        <div className={cn('text-center')}>
-          <button className={cn(s.moreButton)} onClick={handleOnClickMorePosts}>
-            {f('morePosts')}
-          </button>
-        </div>
-      )}
+      {hasMorePosts && <MorePostsButton onClick={handleOnClickMorePosts} />}
     </>
   );
 };

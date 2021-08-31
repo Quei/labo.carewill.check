@@ -11,7 +11,6 @@ import {
   BlockContent,
   BlockContentPickupLarge,
 } from '@components/ui';
-import { CrossBlock } from '@components/icons';
 import { Section } from '../Section';
 import { Pickup } from './Pickup';
 import type { VFC } from 'react';
@@ -32,16 +31,25 @@ export const homeLaboViewFragment = /* GraphQL */ `
     description {
       json
     }
+    interviewImage {
+      url
+    }
+    interviewHomeDescription {
+      json
+    }
     staffNoteHomeDescription {
       json
     }
-    recruitingHomeImage {
+    recruitingImage {
       url
     }
     recruitingHomeDescription {
       json
     }
   }
+`;
+
+export const homeLaboLatestStaffNoteFragment = /* GraphQL */ `
   fragment homeLaboLatestStaffNote on StaffNote {
     content {
       json
@@ -52,36 +60,33 @@ export const homeLaboViewFragment = /* GraphQL */ `
 const Labo: VFC<Props> = ({
   className,
   description,
+  interviewImage,
+  interviewHomeDescription,
   staffNoteHomeDescription,
-  recruitingHomeImage,
+  recruitingImage,
   recruitingHomeDescription,
   latestStaffNote,
 }) => {
   const f = useIntlMessage();
   return (
-    <Section
-      className={cn(s.root)}
-      title={'Labo'}
-      description={renderRichTextReact(description)}
-    >
+    <Section title={'Labo'} description={renderRichTextReact(description)}>
       <Grid>
-        <Block title={f('labo.interviews')} titleTag="h3">
-          {/*
-          TODO:
-          interviewsが確定してからCMSに移行する
-          */}
-          <BlockContent
-            image={{
-              src: '/interviews_preview.jpg',
-              alt: f('labo.interviews'),
-            }}
+        {interviewImage && interviewHomeDescription && (
+          <Block
+            title={f('labo.interviews')}
+            titleTag="h3"
+            href="https://www.makuake.com/project/carewill/"
           >
-            carewill に寄せられた声から生まれたプロジェ
-            クトや、パートナーシップから生まれた挑戦を 連載しています。carewill
-            に寄せられた声から 生まれたプロジェクトや、パートナーシップか
-          </BlockContent>
-          <CrossBlock className="absolute top-0 left-0" />
-        </Block>
+            <BlockContent
+              image={{ src: interviewImage.url, alt: f('store.product') }}
+            >
+              {renderRichTextReact(interviewHomeDescription)}
+              <p>
+                <span className={cn('underline')}>{f('makuakeLink')}</span>
+              </p>
+            </BlockContent>
+          </Block>
+        )}
         <Block
           title={f('labo.staffNotes')}
           titleTag="h3"
@@ -91,7 +96,14 @@ const Labo: VFC<Props> = ({
           <BlockContent
             image={{
               node: (
-                <div className={cn(s.staffNoteImageTexts)}>
+                <div
+                  className={cn(
+                    'bg-light-gray',
+                    'text-2xl',
+                    'overflow-hidden',
+                    s.staffNoteImageTexts
+                  )}
+                >
                   <p>{renderRichText(latestStaffNote?.content)}</p>
                 </div>
               ),
@@ -110,9 +122,10 @@ const Labo: VFC<Props> = ({
           site={SITE}
         >
           <BlockContentPickupLarge
-            imageSrc={recruitingHomeImage?.url}
+            imageSrc={recruitingImage?.url}
             imageAlt={f('labo.recruiting')}
             isImageLayoutCenter={true}
+            disableLineClamp={true}
           >
             {renderRichTextReact(recruitingHomeDescription)}
           </BlockContentPickupLarge>

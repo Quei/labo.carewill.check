@@ -1,7 +1,9 @@
+import { useRouter } from 'next/router';
 import {
   fetcher,
   getAllNavigations,
   getSiblingsStaffNotes,
+  getFooter,
 } from '@lib/contentful';
 import { Layout } from '@components/common';
 import {
@@ -67,9 +69,11 @@ export async function getStaticProps({
     site: 'labo',
   });
   const allNavigationsPromise = getAllNavigations({ locale, preview });
-  const [data, allNavigations] = await Promise.all([
+  const footerPromise = getFooter({ locale, preview });
+  const [data, allNavigations, footerData] = await Promise.all([
     promise,
     allNavigationsPromise,
+    footerPromise,
   ]);
 
   const post = data?.staffNoteCollection?.items?.[0];
@@ -89,7 +93,7 @@ export async function getStaticProps({
   }
 
   return {
-    props: { post, siblingsPosts, allNavigations },
+    props: { post, siblingsPosts, allNavigations, footer: footerData.footer },
     revalidate: 60 * 60, // Every hour
   };
 }
@@ -111,8 +115,6 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
 
   return {
     paths,
-    // Fallback shouldn't be enabled here or otherwise this route
-    // will catch every page, even 404s, and we don't want that
     fallback: false,
   };
 }
@@ -121,10 +123,11 @@ export default function Post({
   post,
   siblingsPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return (
-    <>
-      <StaffNotesSingleView post={post} siblingsPosts={siblingsPosts} />
-    </>
+  const router = useRouter();
+  return router.isFallback ? (
+    <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
+  ) : (
+    <StaffNotesSingleView post={post} siblingsPosts={siblingsPosts} />
   );
 }
 

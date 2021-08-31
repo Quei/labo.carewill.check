@@ -135,10 +135,20 @@ export type AssetFilter = {
 
 export type AssetLinkingCollections = {
   __typename?: 'AssetLinkingCollections';
+  customOrderCollection?: Maybe<CustomOrderCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  footerCollection?: Maybe<FooterCollection>;
   hauteCoutureCollection?: Maybe<HauteCoutureCollection>;
   homeCollection?: Maybe<HomeCollection>;
+  productCollection?: Maybe<ProductCollection>;
   staffNoteCollection?: Maybe<StaffNoteCollection>;
+};
+
+export type AssetLinkingCollectionsCustomOrderCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
 };
 
 export type AssetLinkingCollectionsEntryCollectionArgs = {
@@ -146,6 +156,13 @@ export type AssetLinkingCollectionsEntryCollectionArgs = {
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
+};
+
+export type AssetLinkingCollectionsFooterCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
 };
 
 export type AssetLinkingCollectionsHauteCoutureCollectionArgs = {
@@ -160,6 +177,13 @@ export type AssetLinkingCollectionsHomeCollectionArgs = {
   locale?: Maybe<Scalars['String']>;
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
+};
+
+export type AssetLinkingCollectionsProductCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
 };
 
 export type AssetLinkingCollectionsStaffNoteCollectionArgs = {
@@ -333,6 +357,8 @@ export type CustomOrder = Entry & {
   title?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   description?: Maybe<CustomOrderDescription>;
+  imageCollection?: Maybe<AssetCollection>;
+  mobileImageCollection?: Maybe<AssetCollection>;
 };
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/customOrder) */
@@ -352,6 +378,22 @@ export type CustomOrderSlugArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/customOrder) */
 export type CustomOrderDescriptionArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/customOrder) */
+export type CustomOrderImageCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/customOrder) */
+export type CustomOrderMobileImageCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
 
@@ -408,6 +450,8 @@ export type CustomOrderFilter = {
   description_exists?: Maybe<Scalars['Boolean']>;
   description_contains?: Maybe<Scalars['String']>;
   description_not_contains?: Maybe<Scalars['String']>;
+  imageCollection_exists?: Maybe<Scalars['Boolean']>;
+  mobileImageCollection_exists?: Maybe<Scalars['Boolean']>;
   OR?: Maybe<Array<Maybe<CustomOrderFilter>>>;
   AND?: Maybe<Array<Maybe<CustomOrderFilter>>>;
 };
@@ -470,6 +514,110 @@ export enum EntryOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/footer) */
+export type Footer = Entry & {
+  __typename?: 'Footer';
+  sys: Sys;
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<FooterLinkingCollections>;
+  slug?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  logoCollection?: Maybe<AssetCollection>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/footer) */
+export type FooterLinkedFromArgs = {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/footer) */
+export type FooterSlugArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/footer) */
+export type FooterTitleArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/footer) */
+export type FooterContentArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/footer) */
+export type FooterLogoCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type FooterCollection = {
+  __typename?: 'FooterCollection';
+  total: Scalars['Int'];
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+  items: Array<Maybe<Footer>>;
+};
+
+export type FooterFilter = {
+  sys?: Maybe<SysFilter>;
+  contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
+  slug_exists?: Maybe<Scalars['Boolean']>;
+  slug?: Maybe<Scalars['String']>;
+  slug_not?: Maybe<Scalars['String']>;
+  slug_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  slug_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  slug_contains?: Maybe<Scalars['String']>;
+  slug_not_contains?: Maybe<Scalars['String']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title?: Maybe<Scalars['String']>;
+  title_not?: Maybe<Scalars['String']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  content_exists?: Maybe<Scalars['Boolean']>;
+  content?: Maybe<Scalars['String']>;
+  content_not?: Maybe<Scalars['String']>;
+  content_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  content_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  content_contains?: Maybe<Scalars['String']>;
+  content_not_contains?: Maybe<Scalars['String']>;
+  logoCollection_exists?: Maybe<Scalars['Boolean']>;
+  OR?: Maybe<Array<Maybe<FooterFilter>>>;
+  AND?: Maybe<Array<Maybe<FooterFilter>>>;
+};
+
+export type FooterLinkingCollections = {
+  __typename?: 'FooterLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+export type FooterLinkingCollectionsEntryCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export enum FooterOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+}
+
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/hauteCouture) */
 export type HauteCouture = Entry & {
   __typename?: 'HauteCouture';
@@ -480,6 +628,9 @@ export type HauteCouture = Entry & {
   slug?: Maybe<Scalars['String']>;
   description?: Maybe<HauteCoutureDescription>;
   image?: Maybe<Asset>;
+  orderSheet?: Maybe<Asset>;
+  orderStepsImage?: Maybe<Asset>;
+  orderStepsMobileImage?: Maybe<Asset>;
   formTitle?: Maybe<Scalars['String']>;
   formDescription?: Maybe<HauteCoutureFormDescription>;
 };
@@ -506,6 +657,24 @@ export type HauteCoutureDescriptionArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/hauteCouture) */
 export type HauteCoutureImageArgs = {
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/hauteCouture) */
+export type HauteCoutureOrderSheetArgs = {
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/hauteCouture) */
+export type HauteCoutureOrderStepsImageArgs = {
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/hauteCouture) */
+export type HauteCoutureOrderStepsMobileImageArgs = {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
@@ -574,6 +743,9 @@ export type HauteCoutureFilter = {
   description_contains?: Maybe<Scalars['String']>;
   description_not_contains?: Maybe<Scalars['String']>;
   image_exists?: Maybe<Scalars['Boolean']>;
+  orderSheet_exists?: Maybe<Scalars['Boolean']>;
+  orderStepsImage_exists?: Maybe<Scalars['Boolean']>;
+  orderStepsMobileImage_exists?: Maybe<Scalars['Boolean']>;
   formTitle_exists?: Maybe<Scalars['Boolean']>;
   formTitle?: Maybe<Scalars['String']>;
   formTitle_not?: Maybe<Scalars['String']>;
@@ -645,30 +817,35 @@ export enum HauteCoutureOrder {
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
 export type Home = Entry & {
   __typename?: 'Home';
-  collaborationDescription?: Maybe<HomeCollaborationDescription>;
+  collaborationHomeDescription?: Maybe<HomeCollaborationHomeDescription>;
   collaborationImage?: Maybe<Asset>;
   contentfulMetadata: ContentfulMetadata;
-  customOrderDescription?: Maybe<HomeCustomOrderDescription>;
+  customOrderHomeDescription?: Maybe<HomeCustomOrderHomeDescription>;
   customOrderImage?: Maybe<Asset>;
   description?: Maybe<HomeDescription>;
-  hauteCoutureDescription?: Maybe<HomeHauteCoutureDescription>;
+  endSlideCollection?: Maybe<AssetCollection>;
+  hauteCoutureHomeDescription?: Maybe<HomeHauteCoutureHomeDescription>;
   hauteCoutureImage?: Maybe<Asset>;
+  interviewHomeDescription?: Maybe<HomeInterviewHomeDescription>;
+  interviewImage?: Maybe<Asset>;
   linkedFrom?: Maybe<HomeLinkingCollections>;
   newsPickupCollection?: Maybe<HomeNewsPickupCollection>;
   productDescription?: Maybe<HomeProductDescription>;
+  productHomeDescription?: Maybe<HomeProductHomeDescription>;
   productImage?: Maybe<Asset>;
   recruitingDescription?: Maybe<HomeRecruitingDescription>;
   recruitingHomeDescription?: Maybe<HomeRecruitingHomeDescription>;
-  recruitingHomeImage?: Maybe<Asset>;
+  recruitingImage?: Maybe<Asset>;
   slug?: Maybe<Scalars['String']>;
   staffNoteDescription?: Maybe<HomeStaffNoteDescription>;
   staffNoteHomeDescription?: Maybe<HomeStaffNoteHomeDescription>;
   sys: Sys;
   title?: Maybe<Scalars['String']>;
+  topSlideCollection?: Maybe<AssetCollection>;
 };
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
-export type HomeCollaborationDescriptionArgs = {
+export type HomeCollaborationHomeDescriptionArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
@@ -679,7 +856,7 @@ export type HomeCollaborationImageArgs = {
 };
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
-export type HomeCustomOrderDescriptionArgs = {
+export type HomeCustomOrderHomeDescriptionArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
@@ -695,12 +872,31 @@ export type HomeDescriptionArgs = {
 };
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
-export type HomeHauteCoutureDescriptionArgs = {
+export type HomeEndSlideCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
+export type HomeHauteCoutureHomeDescriptionArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
 export type HomeHauteCoutureImageArgs = {
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
+export type HomeInterviewHomeDescriptionArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
+export type HomeInterviewImageArgs = {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
@@ -724,6 +920,11 @@ export type HomeProductDescriptionArgs = {
 };
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
+export type HomeProductHomeDescriptionArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
 export type HomeProductImageArgs = {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
@@ -740,7 +941,7 @@ export type HomeRecruitingHomeDescriptionArgs = {
 };
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
-export type HomeRecruitingHomeImageArgs = {
+export type HomeRecruitingImageArgs = {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
@@ -765,29 +966,37 @@ export type HomeTitleArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
-export type HomeCollaborationDescription = {
-  __typename?: 'HomeCollaborationDescription';
-  json: Scalars['JSON'];
-  links: HomeCollaborationDescriptionLinks;
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
+export type HomeTopSlideCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
 };
 
-export type HomeCollaborationDescriptionAssets = {
-  __typename?: 'HomeCollaborationDescriptionAssets';
+export type HomeCollaborationHomeDescription = {
+  __typename?: 'HomeCollaborationHomeDescription';
+  json: Scalars['JSON'];
+  links: HomeCollaborationHomeDescriptionLinks;
+};
+
+export type HomeCollaborationHomeDescriptionAssets = {
+  __typename?: 'HomeCollaborationHomeDescriptionAssets';
   hyperlink: Array<Maybe<Asset>>;
   block: Array<Maybe<Asset>>;
 };
 
-export type HomeCollaborationDescriptionEntries = {
-  __typename?: 'HomeCollaborationDescriptionEntries';
+export type HomeCollaborationHomeDescriptionEntries = {
+  __typename?: 'HomeCollaborationHomeDescriptionEntries';
   inline: Array<Maybe<Entry>>;
   hyperlink: Array<Maybe<Entry>>;
   block: Array<Maybe<Entry>>;
 };
 
-export type HomeCollaborationDescriptionLinks = {
-  __typename?: 'HomeCollaborationDescriptionLinks';
-  entries: HomeCollaborationDescriptionEntries;
-  assets: HomeCollaborationDescriptionAssets;
+export type HomeCollaborationHomeDescriptionLinks = {
+  __typename?: 'HomeCollaborationHomeDescriptionLinks';
+  entries: HomeCollaborationHomeDescriptionEntries;
+  assets: HomeCollaborationHomeDescriptionAssets;
 };
 
 export type HomeCollection = {
@@ -798,29 +1007,29 @@ export type HomeCollection = {
   total: Scalars['Int'];
 };
 
-export type HomeCustomOrderDescription = {
-  __typename?: 'HomeCustomOrderDescription';
+export type HomeCustomOrderHomeDescription = {
+  __typename?: 'HomeCustomOrderHomeDescription';
   json: Scalars['JSON'];
-  links: HomeCustomOrderDescriptionLinks;
+  links: HomeCustomOrderHomeDescriptionLinks;
 };
 
-export type HomeCustomOrderDescriptionAssets = {
-  __typename?: 'HomeCustomOrderDescriptionAssets';
+export type HomeCustomOrderHomeDescriptionAssets = {
+  __typename?: 'HomeCustomOrderHomeDescriptionAssets';
   hyperlink: Array<Maybe<Asset>>;
   block: Array<Maybe<Asset>>;
 };
 
-export type HomeCustomOrderDescriptionEntries = {
-  __typename?: 'HomeCustomOrderDescriptionEntries';
+export type HomeCustomOrderHomeDescriptionEntries = {
+  __typename?: 'HomeCustomOrderHomeDescriptionEntries';
   inline: Array<Maybe<Entry>>;
   hyperlink: Array<Maybe<Entry>>;
   block: Array<Maybe<Entry>>;
 };
 
-export type HomeCustomOrderDescriptionLinks = {
-  __typename?: 'HomeCustomOrderDescriptionLinks';
-  entries: HomeCustomOrderDescriptionEntries;
-  assets: HomeCustomOrderDescriptionAssets;
+export type HomeCustomOrderHomeDescriptionLinks = {
+  __typename?: 'HomeCustomOrderHomeDescriptionLinks';
+  entries: HomeCustomOrderHomeDescriptionEntries;
+  assets: HomeCustomOrderHomeDescriptionAssets;
 };
 
 export type HomeDescription = {
@@ -851,26 +1060,34 @@ export type HomeDescriptionLinks = {
 export type HomeFilter = {
   AND?: Maybe<Array<Maybe<HomeFilter>>>;
   OR?: Maybe<Array<Maybe<HomeFilter>>>;
-  collaborationDescription_contains?: Maybe<Scalars['String']>;
-  collaborationDescription_exists?: Maybe<Scalars['Boolean']>;
-  collaborationDescription_not_contains?: Maybe<Scalars['String']>;
+  collaborationHomeDescription_contains?: Maybe<Scalars['String']>;
+  collaborationHomeDescription_exists?: Maybe<Scalars['Boolean']>;
+  collaborationHomeDescription_not_contains?: Maybe<Scalars['String']>;
   collaborationImage_exists?: Maybe<Scalars['Boolean']>;
   contentfulMetadata?: Maybe<ContentfulMetadataFilter>;
-  customOrderDescription_contains?: Maybe<Scalars['String']>;
-  customOrderDescription_exists?: Maybe<Scalars['Boolean']>;
-  customOrderDescription_not_contains?: Maybe<Scalars['String']>;
+  customOrderHomeDescription_contains?: Maybe<Scalars['String']>;
+  customOrderHomeDescription_exists?: Maybe<Scalars['Boolean']>;
+  customOrderHomeDescription_not_contains?: Maybe<Scalars['String']>;
   customOrderImage_exists?: Maybe<Scalars['Boolean']>;
   description_contains?: Maybe<Scalars['String']>;
   description_exists?: Maybe<Scalars['Boolean']>;
   description_not_contains?: Maybe<Scalars['String']>;
-  hauteCoutureDescription_contains?: Maybe<Scalars['String']>;
-  hauteCoutureDescription_exists?: Maybe<Scalars['Boolean']>;
-  hauteCoutureDescription_not_contains?: Maybe<Scalars['String']>;
+  endSlideCollection_exists?: Maybe<Scalars['Boolean']>;
+  hauteCoutureHomeDescription_contains?: Maybe<Scalars['String']>;
+  hauteCoutureHomeDescription_exists?: Maybe<Scalars['Boolean']>;
+  hauteCoutureHomeDescription_not_contains?: Maybe<Scalars['String']>;
   hauteCoutureImage_exists?: Maybe<Scalars['Boolean']>;
+  interviewHomeDescription_contains?: Maybe<Scalars['String']>;
+  interviewHomeDescription_exists?: Maybe<Scalars['Boolean']>;
+  interviewHomeDescription_not_contains?: Maybe<Scalars['String']>;
+  interviewImage_exists?: Maybe<Scalars['Boolean']>;
   newsPickupCollection_exists?: Maybe<Scalars['Boolean']>;
   productDescription_contains?: Maybe<Scalars['String']>;
   productDescription_exists?: Maybe<Scalars['Boolean']>;
   productDescription_not_contains?: Maybe<Scalars['String']>;
+  productHomeDescription_contains?: Maybe<Scalars['String']>;
+  productHomeDescription_exists?: Maybe<Scalars['Boolean']>;
+  productHomeDescription_not_contains?: Maybe<Scalars['String']>;
   productImage_exists?: Maybe<Scalars['Boolean']>;
   recruitingDescription_contains?: Maybe<Scalars['String']>;
   recruitingDescription_exists?: Maybe<Scalars['Boolean']>;
@@ -878,7 +1095,7 @@ export type HomeFilter = {
   recruitingHomeDescription_contains?: Maybe<Scalars['String']>;
   recruitingHomeDescription_exists?: Maybe<Scalars['Boolean']>;
   recruitingHomeDescription_not_contains?: Maybe<Scalars['String']>;
-  recruitingHomeImage_exists?: Maybe<Scalars['Boolean']>;
+  recruitingImage_exists?: Maybe<Scalars['Boolean']>;
   slug?: Maybe<Scalars['String']>;
   slug_contains?: Maybe<Scalars['String']>;
   slug_exists?: Maybe<Scalars['Boolean']>;
@@ -900,31 +1117,57 @@ export type HomeFilter = {
   title_not?: Maybe<Scalars['String']>;
   title_not_contains?: Maybe<Scalars['String']>;
   title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  topSlideCollection_exists?: Maybe<Scalars['Boolean']>;
 };
 
-export type HomeHauteCoutureDescription = {
-  __typename?: 'HomeHauteCoutureDescription';
+export type HomeHauteCoutureHomeDescription = {
+  __typename?: 'HomeHauteCoutureHomeDescription';
   json: Scalars['JSON'];
-  links: HomeHauteCoutureDescriptionLinks;
+  links: HomeHauteCoutureHomeDescriptionLinks;
 };
 
-export type HomeHauteCoutureDescriptionAssets = {
-  __typename?: 'HomeHauteCoutureDescriptionAssets';
+export type HomeHauteCoutureHomeDescriptionAssets = {
+  __typename?: 'HomeHauteCoutureHomeDescriptionAssets';
   hyperlink: Array<Maybe<Asset>>;
   block: Array<Maybe<Asset>>;
 };
 
-export type HomeHauteCoutureDescriptionEntries = {
-  __typename?: 'HomeHauteCoutureDescriptionEntries';
+export type HomeHauteCoutureHomeDescriptionEntries = {
+  __typename?: 'HomeHauteCoutureHomeDescriptionEntries';
   inline: Array<Maybe<Entry>>;
   hyperlink: Array<Maybe<Entry>>;
   block: Array<Maybe<Entry>>;
 };
 
-export type HomeHauteCoutureDescriptionLinks = {
-  __typename?: 'HomeHauteCoutureDescriptionLinks';
-  entries: HomeHauteCoutureDescriptionEntries;
-  assets: HomeHauteCoutureDescriptionAssets;
+export type HomeHauteCoutureHomeDescriptionLinks = {
+  __typename?: 'HomeHauteCoutureHomeDescriptionLinks';
+  entries: HomeHauteCoutureHomeDescriptionEntries;
+  assets: HomeHauteCoutureHomeDescriptionAssets;
+};
+
+export type HomeInterviewHomeDescription = {
+  __typename?: 'HomeInterviewHomeDescription';
+  json: Scalars['JSON'];
+  links: HomeInterviewHomeDescriptionLinks;
+};
+
+export type HomeInterviewHomeDescriptionAssets = {
+  __typename?: 'HomeInterviewHomeDescriptionAssets';
+  hyperlink: Array<Maybe<Asset>>;
+  block: Array<Maybe<Asset>>;
+};
+
+export type HomeInterviewHomeDescriptionEntries = {
+  __typename?: 'HomeInterviewHomeDescriptionEntries';
+  inline: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  block: Array<Maybe<Entry>>;
+};
+
+export type HomeInterviewHomeDescriptionLinks = {
+  __typename?: 'HomeInterviewHomeDescriptionLinks';
+  entries: HomeInterviewHomeDescriptionEntries;
+  assets: HomeInterviewHomeDescriptionAssets;
 };
 
 export type HomeLinkingCollections = {
@@ -985,6 +1228,31 @@ export type HomeProductDescriptionLinks = {
   __typename?: 'HomeProductDescriptionLinks';
   entries: HomeProductDescriptionEntries;
   assets: HomeProductDescriptionAssets;
+};
+
+export type HomeProductHomeDescription = {
+  __typename?: 'HomeProductHomeDescription';
+  json: Scalars['JSON'];
+  links: HomeProductHomeDescriptionLinks;
+};
+
+export type HomeProductHomeDescriptionAssets = {
+  __typename?: 'HomeProductHomeDescriptionAssets';
+  hyperlink: Array<Maybe<Asset>>;
+  block: Array<Maybe<Asset>>;
+};
+
+export type HomeProductHomeDescriptionEntries = {
+  __typename?: 'HomeProductHomeDescriptionEntries';
+  inline: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  block: Array<Maybe<Entry>>;
+};
+
+export type HomeProductHomeDescriptionLinks = {
+  __typename?: 'HomeProductHomeDescriptionLinks';
+  entries: HomeProductHomeDescriptionEntries;
+  assets: HomeProductHomeDescriptionAssets;
 };
 
 export type HomeRecruitingDescription = {
@@ -1520,6 +1788,9 @@ export type Product = Entry & {
   linkedFrom?: Maybe<ProductLinkingCollections>;
   title?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  imageCollection?: Maybe<AssetCollection>;
 };
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/product) */
@@ -1534,6 +1805,24 @@ export type ProductTitleArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/product) */
 export type ProductSlugArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/product) */
+export type ProductDateArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/product) */
+export type ProductDescriptionArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/product) */
+export type ProductImageCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
 
@@ -1562,6 +1851,23 @@ export type ProductFilter = {
   slug_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
   slug_contains?: Maybe<Scalars['String']>;
   slug_not_contains?: Maybe<Scalars['String']>;
+  date_exists?: Maybe<Scalars['Boolean']>;
+  date?: Maybe<Scalars['DateTime']>;
+  date_not?: Maybe<Scalars['DateTime']>;
+  date_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  date_not_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  date_gt?: Maybe<Scalars['DateTime']>;
+  date_gte?: Maybe<Scalars['DateTime']>;
+  date_lt?: Maybe<Scalars['DateTime']>;
+  date_lte?: Maybe<Scalars['DateTime']>;
+  description_exists?: Maybe<Scalars['Boolean']>;
+  description?: Maybe<Scalars['String']>;
+  description_not?: Maybe<Scalars['String']>;
+  description_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  description_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  description_contains?: Maybe<Scalars['String']>;
+  description_not_contains?: Maybe<Scalars['String']>;
+  imageCollection_exists?: Maybe<Scalars['Boolean']>;
   OR?: Maybe<Array<Maybe<ProductFilter>>>;
   AND?: Maybe<Array<Maybe<ProductFilter>>>;
 };
@@ -1583,6 +1889,8 @@ export enum ProductOrder {
   TitleDesc = 'title_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
+  DateAsc = 'date_ASC',
+  DateDesc = 'date_DESC',
   SysIdAsc = 'sys_id_ASC',
   SysIdDesc = 'sys_id_DESC',
   SysPublishedAtAsc = 'sys_publishedAt_ASC',
@@ -1602,6 +1910,8 @@ export type Query = {
   customOrder?: Maybe<CustomOrder>;
   customOrderCollection?: Maybe<CustomOrderCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  footer?: Maybe<Footer>;
+  footerCollection?: Maybe<FooterCollection>;
   hauteCouture?: Maybe<HauteCouture>;
   hauteCoutureCollection?: Maybe<HauteCoutureCollection>;
   home?: Maybe<Home>;
@@ -1672,6 +1982,21 @@ export type QueryEntryCollectionArgs = {
   preview?: Maybe<Scalars['Boolean']>;
   skip?: Maybe<Scalars['Int']>;
   where?: Maybe<EntryFilter>;
+};
+
+export type QueryFooterArgs = {
+  id: Scalars['String'];
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type QueryFooterCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  where?: Maybe<FooterFilter>;
+  order?: Maybe<Array<Maybe<FooterOrder>>>;
 };
 
 export type QueryHauteCoutureArgs = {
@@ -2199,14 +2524,35 @@ export type CfNewsCategoryNestedFilter = {
   AND?: Maybe<Array<Maybe<CfNewsCategoryNestedFilter>>>;
 };
 
+export type FooterFragment = {
+  __typename?: 'Footer';
+  content?: Maybe<string>;
+  logoCollection?: Maybe<{
+    __typename?: 'AssetCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'Asset';
+        url?: Maybe<string>;
+        title?: Maybe<string>;
+        sys: { __typename?: 'Sys'; id: string };
+      }>
+    >;
+  }>;
+};
+
 export type HomeLaboViewFragment = {
   __typename?: 'Home';
   description?: Maybe<{ __typename?: 'HomeDescription'; json: any }>;
+  interviewImage?: Maybe<{ __typename?: 'Asset'; url?: Maybe<string> }>;
+  interviewHomeDescription?: Maybe<{
+    __typename?: 'HomeInterviewHomeDescription';
+    json: any;
+  }>;
   staffNoteHomeDescription?: Maybe<{
     __typename?: 'HomeStaffNoteHomeDescription';
     json: any;
   }>;
-  recruitingHomeImage?: Maybe<{ __typename?: 'Asset'; url?: Maybe<string> }>;
+  recruitingImage?: Maybe<{ __typename?: 'Asset'; url?: Maybe<string> }>;
   recruitingHomeDescription?: Maybe<{
     __typename?: 'HomeRecruitingHomeDescription';
     json: any;
@@ -2254,6 +2600,7 @@ export type RecruitingViewPostFragment = {
                 __typename: 'CustomOrder';
                 sys: { __typename?: 'Sys'; id: string };
               }
+            | { __typename: 'Footer'; sys: { __typename?: 'Sys'; id: string } }
             | {
                 __typename: 'HauteCouture';
                 sys: { __typename?: 'Sys'; id: string };
@@ -2404,6 +2751,7 @@ export type StaffNotesSingleViewPostFragment = {
                 __typename: 'CustomOrder';
                 sys: { __typename?: 'Sys'; id: string };
               }
+            | { __typename: 'Footer'; sys: { __typename?: 'Sys'; id: string } }
             | {
                 __typename: 'HauteCouture';
                 sys: { __typename?: 'Sys'; id: string };
@@ -2453,6 +2801,12 @@ export type StaffNotesSingleViewSiblingsPostsFragment = {
   title?: Maybe<string>;
 };
 
+export type NavigationStoreFragment = {
+  __typename?: 'Navigation';
+  menu?: Maybe<any>;
+  sns?: Maybe<any>;
+};
+
 export type GetNavigationStoreQueryVariables = Exact<{
   locale: Scalars['String'];
   slug: Scalars['String'];
@@ -2469,6 +2823,11 @@ export type GetNavigationStoreQuery = {
   }>;
 };
 
+export type NavigationLaboFragment = {
+  __typename?: 'Navigation';
+  menu?: Maybe<any>;
+};
+
 export type GetNavigationLaboQueryVariables = Exact<{
   locale: Scalars['String'];
   slug: Scalars['String'];
@@ -2481,6 +2840,11 @@ export type GetNavigationLaboQuery = {
     __typename?: 'NavigationCollection';
     items: Array<Maybe<{ __typename?: 'Navigation'; menu?: Maybe<any> }>>;
   }>;
+};
+
+export type NavigationAboutFragment = {
+  __typename?: 'Navigation';
+  menu?: Maybe<any>;
 };
 
 export type GetNavigationAboutQueryVariables = Exact<{
@@ -2570,6 +2934,36 @@ export type GetAllStaffNotesQuery = {
   }>;
 };
 
+export type GetFooterQueryVariables = Exact<{
+  locale: Scalars['String'];
+  slug: Scalars['String'];
+  preview?: Maybe<Scalars['Boolean']>;
+}>;
+
+export type GetFooterQuery = {
+  __typename?: 'Query';
+  footerCollection?: Maybe<{
+    __typename?: 'FooterCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'Footer';
+        content?: Maybe<string>;
+        logoCollection?: Maybe<{
+          __typename?: 'AssetCollection';
+          items: Array<
+            Maybe<{
+              __typename?: 'Asset';
+              url?: Maybe<string>;
+              title?: Maybe<string>;
+              sys: { __typename?: 'Sys'; id: string };
+            }>
+          >;
+        }>;
+      }>
+    >;
+  }>;
+};
+
 export type GetSiblingsStaffNotesQueryVariables = Exact<{
   locale: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
@@ -2619,6 +3013,11 @@ type RichTextEntryHyperlink_CustomOrder_Fragment = {
   sys: { __typename?: 'Sys'; id: string };
 };
 
+type RichTextEntryHyperlink_Footer_Fragment = {
+  __typename: 'Footer';
+  sys: { __typename?: 'Sys'; id: string };
+};
+
 type RichTextEntryHyperlink_HauteCouture_Fragment = {
   __typename: 'HauteCouture';
   sys: { __typename?: 'Sys'; id: string };
@@ -2664,6 +3063,7 @@ type RichTextEntryHyperlink_StaffNote_Fragment = {
 export type RichTextEntryHyperlinkFragment =
   | RichTextEntryHyperlink_Category_Fragment
   | RichTextEntryHyperlink_CustomOrder_Fragment
+  | RichTextEntryHyperlink_Footer_Fragment
   | RichTextEntryHyperlink_HauteCouture_Fragment
   | RichTextEntryHyperlink_Home_Fragment
   | RichTextEntryHyperlink_Navigation_Fragment
@@ -2687,14 +3087,16 @@ export type GetHomeLaboQuery = {
       Maybe<{
         __typename?: 'Home';
         description?: Maybe<{ __typename?: 'HomeDescription'; json: any }>;
+        interviewImage?: Maybe<{ __typename?: 'Asset'; url?: Maybe<string> }>;
+        interviewHomeDescription?: Maybe<{
+          __typename?: 'HomeInterviewHomeDescription';
+          json: any;
+        }>;
         staffNoteHomeDescription?: Maybe<{
           __typename?: 'HomeStaffNoteHomeDescription';
           json: any;
         }>;
-        recruitingHomeImage?: Maybe<{
-          __typename?: 'Asset';
-          url?: Maybe<string>;
-        }>;
+        recruitingImage?: Maybe<{ __typename?: 'Asset'; url?: Maybe<string> }>;
         recruitingHomeDescription?: Maybe<{
           __typename?: 'HomeRecruitingHomeDescription';
           json: any;
@@ -2770,6 +3172,10 @@ export type GetRecruitingSingleQuery = {
                     }
                   | {
                       __typename: 'CustomOrder';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'Footer';
                       sys: { __typename?: 'Sys'; id: string };
                     }
                   | {
@@ -2909,6 +3315,10 @@ export type GetStaffNotesSingleQuery = {
                     }
                   | {
                       __typename: 'CustomOrder';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'Footer';
                       sys: { __typename?: 'Sys'; id: string };
                     }
                   | {

@@ -2,6 +2,7 @@ import cn from 'classnames';
 import s from './RecruitingView.module.css';
 import { useIntlMessage } from '@lib/hooks/useIntlMessage';
 import { renderRichText } from '@lib/contentful/utils/rich-text';
+import { Seo } from '@components/common';
 import { PageHeader } from '@components/ui';
 import { Post } from './Post';
 import type { VFC } from 'react';
@@ -27,11 +28,13 @@ export const recruitingViewDescriptionFragment = /* GraphQL */ `
 
 const RecruitingView: VFC<Props> = ({ home, post, allPosts }) => {
   const f = useIntlMessage();
+  const title = `${post.title} - ${f('labo.recruiting')}`;
+  const descriptionText = renderRichText(home.recruitingDescription);
   return (
     <>
+      <Seo title={title} description={descriptionText} />
       <PageHeader title={f('labo.recruiting')} titleTag="p">
-        {home?.recruitingDescription &&
-          renderRichText(home.recruitingDescription)}
+        {descriptionText}
       </PageHeader>
       <Post {...post} allPosts={allPosts} />
     </>

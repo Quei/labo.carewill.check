@@ -27,18 +27,18 @@ const Pagination: VFC<Props> = ({
 }) => {
   const f = useIntlMessage();
   return (
-    <ul className={cn(s.root, className)}>
-      <li className={cn(s.next)}>
+    <ul className={cn('flex', 'justify-between', 'mt-20', s.root, className)}>
+      <li className={cn('text-left', s.next)}>
         {siblingsPosts?.next?.slug && (
           <Link href={`/${basePath}${siblingsPosts.next.slug}`}>
             {siblingsPosts.next?.title}
           </Link>
         )}
       </li>
-      <li className={cn(s.index)}>
+      <li className={cn('text-center')}>
         {indexLink && <Link href={indexLink}>{f('index')}</Link>}
       </li>
-      <li className={cn(s.previous)}>
+      <li className={cn('text-right', s.previous)}>
         {siblingsPosts?.previous?.slug && (
           <Link href={`/${basePath}${siblingsPosts.previous.slug}`}>
             {siblingsPosts.previous?.title}
