@@ -12,7 +12,7 @@
     "site_name": "carewill labo",
     "images": [
       {
-        "url": "/ogp.jpg",
+        "url": "https://labo.carewill.co.jp/ogp.jpg",
         "width": 1200,
         "height": 630,
         "alt": "carewill labo"
