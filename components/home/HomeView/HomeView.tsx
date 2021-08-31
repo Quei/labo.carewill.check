@@ -10,7 +10,7 @@ type Props = {
 const HomeView: VFC<Props> = ({ labo }) => {
   return (
     <>
-      <Seo title={'Carewill Labo'} titleTemplate={'Carewill Labo'} />
+      <Seo title={'carewill labo'} titleTemplate={'carewill labo'} />
       {labo && <Labo {...labo} />}
     </>
   );
