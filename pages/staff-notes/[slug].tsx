@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import {
   fetcher,
   getAllNavigations,
@@ -116,7 +117,7 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
     paths,
     // Fallback shouldn't be enabled here or otherwise this route
     // will catch every page, even 404s, and we don't want that
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -124,10 +125,11 @@ export default function Post({
   post,
   siblingsPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return (
-    <>
-      <StaffNotesSingleView post={post} siblingsPosts={siblingsPosts} />
-    </>
+  const router = useRouter();
+  return router.isFallback ? (
+    <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
+  ) : (
+    <StaffNotesSingleView post={post} siblingsPosts={siblingsPosts} />
   );
 }
 

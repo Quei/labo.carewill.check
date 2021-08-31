@@ -131,7 +131,7 @@ const StaffNotesArchiveView: VFC<Props> = ({
             titleTag={category ? 'h1' : undefined}
           />
           {currentPosts && (
-            <div className={cn(s.posts)}>
+            <div className={cn('mt-10', 'md:mt-8', s.posts)}>
               {currentPosts.map((post) => (
                 <Post key={post?.sys.id} {...post} />
               ))}
