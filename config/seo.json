@@ -1,21 +1,21 @@
 {
-  "title": "Carewill Labo",
-  "titleTemplate": "%s - Carewill Labo",
-  "defaultTitle": "Carewill Labo",
-  "description": "Carewill Labo",
+  "title": "carewill labo",
+  "titleTemplate": "%s - carewill labo",
+  "defaultTitle": "carewill labo",
+  "description": "carewill labo",
   "openGraph": {
-    "title": "Carewill Labo",
-    "description": "Carewill Labo",
+    "title": "carewill labo",
+    "description": "carewill labo",
     "type": "website",
     "locale": "ja",
     "url": "https://labo.carewill.co.jp",
-    "site_name": "Carewill Labo",
+    "site_name": "carewill labo",
     "images": [
       {
         "url": "/ogp.jpg",
         "width": 1200,
         "height": 630,
-        "alt": "Carewill Labo"
+        "alt": "carewill labo"
       }
     ]
   },
