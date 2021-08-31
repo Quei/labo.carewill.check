@@ -1,5 +1,5 @@
 export const en: Record<string, any> = {
-  carewill: 'Carewill',
+  carewill: 'carewill',
   pdfLink: 'PDF',
   relatedPosts: 'Related posts',
   addToCart: 'Add to cart',
@@ -41,8 +41,8 @@ export const en: Record<string, any> = {
   ['form.other.placeholder']: 'Enter any other answers.',
   ['form.topLink']: 'Back to the top page',
   // labo
-  ['labo.interviews']: 'Project',
-  ['labo.interviewsPickup']: 'Project pickup',
+  ['labo.interviews']: 'Interview',
+  ['labo.interviewsPickup']: 'Interview pickup',
   ['labo.staffNotes']: 'Staff notes',
   ['labo.recruiting']: 'Recruiting',
   ['labo.selectCategory']: 'Category',
