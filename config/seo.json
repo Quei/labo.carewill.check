@@ -12,7 +12,7 @@
     "site_name": "carewill labo",
     "images": [
       {
-        "url": "/ogp.jpg",
+        "url": "https://labo.carewill.co.jp/ogp.jpg",
         "width": 1200,
         "height": 630,
         "alt": "carewill labo"
@@ -23,5 +23,26 @@
     "handle": "@carewill_pr",
     "site": "@carewill_pr",
     "cardType": "summary_large_image"
-  }
+  },
+  "additionalLinkTags": [
+    {
+      "rel": "icon",
+      "href": "/favicon.ico"
+    },
+    {
+      "rel": "apple-touch-icon",
+      "href": "/icon-144x144.png",
+      "sizes": "144x144"
+    },
+    {
+      "rel": "apple-touch-icon",
+      "href": "/icon-192x192.png",
+      "sizes": "192x192"
+    },
+    {
+      "rel": "apple-touch-icon",
+      "href": "/icon-512x512.png",
+      "sizes": "512x512"
+    }
+  ]
 }
