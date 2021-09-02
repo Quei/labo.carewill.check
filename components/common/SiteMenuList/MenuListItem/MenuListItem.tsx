@@ -38,17 +38,30 @@ const MenuListItem: React.VFC<Props> = ({
   return (
     <li
       className={cn(
+        'relative',
         s.root,
         { [s.header]: type === 'header' },
         { [s.footer]: type === 'footer' },
         className
       )}
     >
-      <Link className={cn(s.title)} href="/" site={site} hasBorderEffect={true}>
+      <Link
+        className={cn(s.title)}
+        href="/"
+        site={site}
+        hasBorderEffect={true}
+        isPartiallyCurrent={true}
+      >
         {title}
       </Link>
       <PlusButton
-        className={cn(s.button)}
+        className={cn(
+          'absolute',
+          'top-2',
+          'right-4',
+          'focus:outline-none',
+          'md:hidden'
+        )}
         targetId={childrenTargetId}
         hasPressed={hasShownChildrenForMobile}
         onClick={handleOnClickPlusButton}
