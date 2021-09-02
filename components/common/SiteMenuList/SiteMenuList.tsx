@@ -48,8 +48,8 @@ const SiteMenuList: VFC<Props> = ({ className, id, allNavigations, type }) => {
         />
       )}
       {type === 'header' && (
-        <li className={cn(s.contact)}>
-          <Link href="/company/contact" site="about">
+        <li className={cn('md:px-site-vertical-md', s.contact)}>
+          <Link href="/company/contact" site="about" hasBorderEffect={true}>
             Contact
           </Link>
         </li>
