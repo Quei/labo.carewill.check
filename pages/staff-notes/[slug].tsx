@@ -115,7 +115,7 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
 
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   };
 }
 
@@ -124,11 +124,7 @@ export default function Post({
   siblingsPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
-  return router.isFallback ? (
-    <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
-  ) : (
-    <StaffNotesSingleView post={post} siblingsPosts={siblingsPosts} />
-  );
+  return <StaffNotesSingleView post={post} siblingsPosts={siblingsPosts} />;
 }
 
 Post.Layout = Layout;

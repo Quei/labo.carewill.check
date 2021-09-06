@@ -2934,6 +2934,46 @@ export type GetAllStaffNotesQuery = {
   }>;
 };
 
+export type GetAllStaffNotesForSitemapQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+}>;
+
+export type GetAllStaffNotesForSitemapQuery = {
+  __typename?: 'Query';
+  staffNoteCollection?: Maybe<{
+    __typename?: 'StaffNoteCollection';
+    total: number;
+    items: Array<
+      Maybe<{
+        __typename?: 'StaffNote';
+        slug?: Maybe<string>;
+        sys: { __typename?: 'Sys'; publishedAt?: Maybe<any> };
+      }>
+    >;
+  }>;
+};
+
+export type GetAllCategoriesForSitemapQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+}>;
+
+export type GetAllCategoriesForSitemapQuery = {
+  __typename?: 'Query';
+  categoryCollection?: Maybe<{
+    __typename?: 'CategoryCollection';
+    total: number;
+    items: Array<
+      Maybe<{
+        __typename?: 'Category';
+        slug?: Maybe<string>;
+        sys: { __typename?: 'Sys'; publishedAt?: Maybe<any> };
+      }>
+    >;
+  }>;
+};
+
 export type GetFooterQueryVariables = Exact<{
   locale: Scalars['String'];
   slug: Scalars['String'];

@@ -1,3 +1,4 @@
+import { sleep } from '@lib/sleep';
 import { fetcher } from '@lib/contentful';
 import { staffNotesArchiveViewPostWithIdFragment } from '@components/staff-notes';
 import type { GetStaticPropsContext } from 'next';
@@ -19,13 +20,8 @@ const getAllStaffNotesByCategoryQuery = /* GraphQL */ `
     ) {
       items {
         title
-        linkedFrom {
-          staffNoteCollection(
-            locale: $locale
-            preview: $preview
-            limit: $limit
-            skip: $skip
-          ) {
+        linkedFrom(allowedLocales: ["ja", "en"]) {
+          staffNoteCollection(preview: $preview, limit: $limit, skip: $skip) {
             total
             items {
               ...staffNotesArchiveViewPostWithId
@@ -82,6 +78,7 @@ export const getAllStaffNotesByCategory = async ({
       shouldQueryMorePosts = false;
     }
 
+    await sleep(300);
     page++;
   }
 
