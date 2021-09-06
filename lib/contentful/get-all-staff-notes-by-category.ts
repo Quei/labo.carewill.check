@@ -1,3 +1,4 @@
+import { sleep } from '@lib/sleep';
 import { fetcher } from '@lib/contentful';
 import { staffNotesArchiveViewPostWithIdFragment } from '@components/staff-notes';
 import type { GetStaticPropsContext } from 'next';
@@ -82,6 +83,7 @@ export const getAllStaffNotesByCategory = async ({
       shouldQueryMorePosts = false;
     }
 
+    await sleep(300);
     page++;
   }
 
