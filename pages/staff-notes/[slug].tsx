@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import {
   fetcher,
   getAllNavigations,
@@ -82,6 +81,7 @@ export async function getStaticProps({
     locale,
     preview,
     date: post?.date,
+    slug,
   });
 
   if (!post) {
@@ -123,7 +123,6 @@ export default function Post({
   post,
   siblingsPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const router = useRouter();
   return <StaffNotesSingleView post={post} siblingsPosts={siblingsPosts} />;
 }
 
