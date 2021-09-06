@@ -8,13 +8,14 @@ const getSiblingsStaffNotesQuery = /* GraphQL */ `
     $locale: String!
     $preview: Boolean = false
     $date: DateTime!
+    $slug: String!
   ) {
     previous: staffNoteCollection(
       locale: $locale
       preview: $preview
       limit: 1
       order: date_DESC
-      where: { date_lt: $date }
+      where: { date_lte: $date, slug_not: $slug }
     ) {
       items {
         ...staffNotesSingleViewSiblingsPosts
@@ -25,7 +26,7 @@ const getSiblingsStaffNotesQuery = /* GraphQL */ `
       preview: $preview
       limit: 1
       order: date_ASC
-      where: { date_gt: $date }
+      where: { date_gte: $date, slug_not: $slug }
     ) {
       items {
         ...staffNotesSingleViewSiblingsPosts
@@ -40,12 +41,14 @@ type GetSiblingsStaffNotes = Pick<
   GetStaticPropsContext,
   'locale' | 'preview'
 > & {
-  date: string;
+  date?: string;
+  slug?: string;
 };
 export const getSiblingsStaffNotes = async ({
   locale,
   preview,
-  date,
+  date = '',
+  slug = '',
 }: GetSiblingsStaffNotes) => {
   const response = await fetcher<GetSiblingsStaffNotesQuery>({
     query: getSiblingsStaffNotesQuery,
@@ -53,6 +56,7 @@ export const getSiblingsStaffNotes = async ({
       locale,
       preview,
       date,
+      slug,
     },
     site: 'labo',
   });
