@@ -20,13 +20,8 @@ const getAllStaffNotesByCategoryQuery = /* GraphQL */ `
     ) {
       items {
         title
-        linkedFrom {
-          staffNoteCollection(
-            locale: $locale
-            preview: $preview
-            limit: $limit
-            skip: $skip
-          ) {
+        linkedFrom(allowedLocales: ["ja", "en"]) {
+          staffNoteCollection(preview: $preview, limit: $limit, skip: $skip) {
             total
             items {
               ...staffNotesArchiveViewPostWithId
