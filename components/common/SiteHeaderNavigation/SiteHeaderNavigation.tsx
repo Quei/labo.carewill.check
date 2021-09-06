@@ -38,10 +38,10 @@ const useMenu = () => {
     };
   }, [hasShownMenu]);
 
-  const { asPath } = useRouter();
+  const { asPath, locale } = useRouter();
   useEffect(() => {
     setHasShowMenu(false);
-  }, [asPath]);
+  }, [asPath, locale]);
   return { hasShownMenu, toggleMenu, menuListWrapperRef };
 };
 
