@@ -130,7 +130,7 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
     paths,
     // Fallback shouldn't be enabled here or otherwise this route
     // will catch every page, even 404s, and we don't want that
-    fallback: false,
+    fallback: 'blocking',
   };
 }
 
@@ -141,14 +141,12 @@ export default function Posts({
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <>
-      <StaffNotesArchiveView
-        home={home}
-        category={category}
-        posts={posts}
-        categories={categories}
-      />
-    </>
+    <StaffNotesArchiveView
+      home={home}
+      category={category}
+      posts={posts}
+      categories={categories}
+    />
   );
 }
 
