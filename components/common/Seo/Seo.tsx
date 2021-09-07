@@ -37,14 +37,14 @@ const Seo: VFC<Props> = ({ title, titleTemplate, description, image }) => {
     description,
     images: image?.url && image?.width && image?.height ? [image] : undefined,
   } as NextSeoProps['openGraph'];
-  // const languageAlternates = useLanguageAlternates();
+  const languageAlternates = useLanguageAlternates();
   return (
     <NextSeo
       title={title}
       titleTemplate={titleTemplate}
       description={description}
       openGraph={openGraph}
-      // languageAlternates={languageAlternates ?? undefined}
+      languageAlternates={languageAlternates ?? undefined}
     />
   );
 };
