@@ -10,6 +10,7 @@ type CollectionBaseType = {
 type FetchAllProps<Q> = Pick<GetStaticPropsContext, 'locale' | 'preview'> & {
   site: Site;
   query: string;
+  slug?: string;
   pickCollection: <C>(arg: Q) => C | undefined | null;
 };
 export const fetchAll = async <
@@ -20,6 +21,7 @@ export const fetchAll = async <
   query,
   locale,
   preview,
+  slug,
   pickCollection,
 }: FetchAllProps<QueryType>) => {
   const limit = 100;
@@ -33,6 +35,7 @@ export const fetchAll = async <
       variables: {
         locale,
         preview,
+        slug,
         limit,
         skip: page * limit,
       },
