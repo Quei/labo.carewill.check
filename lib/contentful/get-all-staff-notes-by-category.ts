@@ -46,6 +46,9 @@ export const getAllStaffNotesByCategory = async ({
   preview,
   slug,
 }: GetAllStaffNotesByCategory) => {
+  // NOTE:
+  // categoryTitleやlinkedFromなどがあるので、
+  // fetchAllは使わず、直接取得する。
   const limit = 100;
   let categoryTitle = '';
   let page = 0;

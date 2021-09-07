@@ -2,6 +2,7 @@ import {
   fetcher,
   getAllNavigations,
   getAllStaffNotesByCategory,
+  getAllCategories,
   getFooter,
 } from '@lib/contentful';
 import { Layout } from '@components/common';
@@ -35,15 +36,9 @@ const getStaffNotesArchiveCategory = /* GraphQL */ `
         ...staffNotesArchiveViewDescription
       }
     }
-    allCategories: categoryCollection(locale: $locale, preview: $preview) {
-      items {
-        ...staffNotesArchiveViewCategory
-      }
-    }
   }
 
   ${staffNotesArchiveViewDescriptionFragment}
-  ${staffNotesArchiveViewCategoryFragment}
 `;
 
 const getStaffNotesArchiveCategoryPaths = /* GraphQL */ `
@@ -85,18 +80,21 @@ export async function getStaticProps({
     preview,
     slug,
   });
+  const allCategoriesPromise = getAllCategories({ locale, preview });
   const allNavigationsPromise = getAllNavigations({ locale, preview });
   const footerPromise = getFooter({ locale, preview });
-  const [data, allStaffNotes, allNavigations, footerData] = await Promise.all([
-    promise,
-    allStaffNotesPromise,
-    allNavigationsPromise,
-    footerPromise,
-  ]);
+  const [data, allStaffNotes, allCategories, allNavigations, footerData] =
+    await Promise.all([
+      promise,
+      allStaffNotesPromise,
+      allCategoriesPromise,
+      allNavigationsPromise,
+      footerPromise,
+    ]);
 
   const home = data?.homeCollection?.items?.[0];
   const { categoryTitle, posts } = allStaffNotes;
-  const categories = data?.allCategories?.items;
+  const { categories } = allCategories;
 
   return {
     props: {

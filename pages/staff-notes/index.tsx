@@ -2,12 +2,12 @@ import {
   fetcher,
   getAllNavigations,
   getAllStaffNotes,
+  getAllCategories,
   getFooter,
 } from '@lib/contentful';
 import { Layout } from '@components/common';
 import {
   StaffNotesArchiveView,
-  staffNotesArchiveViewCategoryFragment,
   staffNotesArchiveViewDescriptionFragment,
 } from '@components/staff-notes';
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
@@ -25,22 +25,14 @@ const getStaffNotesArchive = /* GraphQL */ `
         ...staffNotesArchiveViewDescription
       }
     }
-    categoryCollection(locale: $locale, preview: $preview) {
-      items {
-        ...staffNotesArchiveViewCategory
-      }
-    }
   }
 
   ${staffNotesArchiveViewDescriptionFragment}
-  ${staffNotesArchiveViewCategoryFragment}
 `;
 
 export async function getStaticProps({
   preview,
-  params,
   locale,
-  locales,
 }: GetStaticPropsContext) {
   const promise = fetcher<GetStaffNotesArchiveQuery>({
     query: getStaffNotesArchive,
@@ -52,24 +44,30 @@ export async function getStaticProps({
   });
 
   // NOTE:
-  // categoryと合わせて、
+  // category(pages/staff-notes/category/[slug].tsx)と合わせて、
   // こちらも、一旦全て取得するようにする。
   const allStaffNotesPromise = getAllStaffNotes({
     locale,
     preview,
   });
+  const allCategoriesPromise = getAllCategories({
+    locale,
+    preview,
+  });
   const allNavigationsPromise = getAllNavigations({ locale, preview });
   const footerPromise = getFooter({ locale, preview });
-  const [data, allStaffNotes, allNavigations, footerData] = await Promise.all([
-    promise,
-    allStaffNotesPromise,
-    allNavigationsPromise,
-    footerPromise,
-  ]);
+  const [data, allStaffNotes, allCategories, allNavigations, footerData] =
+    await Promise.all([
+      promise,
+      allStaffNotesPromise,
+      allCategoriesPromise,
+      allNavigationsPromise,
+      footerPromise,
+    ]);
 
   const home = data?.homeCollection?.items?.[0];
   const { posts } = allStaffNotes;
-  const categories = data?.categoryCollection?.items;
+  const { categories } = allCategories;
 
   return {
     props: {
