@@ -1,5 +1,4 @@
-import { sleep } from '@lib/sleep';
-import { fetcher } from '@lib/contentful';
+import { fetchAll } from '@lib/contentful/utils/fetch-all';
 import { staffNotesArchiveViewPostWithIdFragment } from '@components/staff-notes';
 import type { GetStaticPropsContext } from 'next';
 import type { GetAllStaffNotesQuery } from 'types/schema';
@@ -28,41 +27,27 @@ const getAllStaffNotesQuery = /* GraphQL */ `
   ${staffNotesArchiveViewPostWithIdFragment}
 `;
 
-type GetAllStaffNotes = Pick<GetStaticPropsContext, 'locale' | 'preview'>;
+const pickCollection = <C>(response: GetAllStaffNotesQuery) => {
+  if ('staffNoteCollection' in response) {
+    return response.staffNoteCollection as C | undefined;
+  }
+  return null;
+};
+
 export const getAllStaffNotes = async ({
   locale,
   preview,
-}: GetAllStaffNotes) => {
-  const limit = 100;
-  let page = 0;
-  let shouldQueryMorePosts = true;
-  const posts = [];
-
-  while (shouldQueryMorePosts) {
-    const response = await fetcher<GetAllStaffNotesQuery>({
-      query: getAllStaffNotesQuery,
-      variables: {
-        locale,
-        preview,
-        limit,
-        skip: page * limit,
-      },
-      site: 'labo',
-    });
-
-    const staffNoteCollection = response?.staffNoteCollection;
-
-    if (staffNoteCollection?.items?.length) {
-      posts.push(...staffNoteCollection.items);
-      shouldQueryMorePosts = posts.length < staffNoteCollection.total;
-    } else {
-      shouldQueryMorePosts = false;
-    }
-
-    sleep(300);
-
-    page++;
-  }
+}: Pick<GetStaticPropsContext, 'locale' | 'preview'>) => {
+  const posts = await fetchAll<
+    GetAllStaffNotesQuery,
+    NonNullable<GetAllStaffNotesQuery['staffNoteCollection']>
+  >({
+    site: 'labo',
+    query: getAllStaffNotesQuery,
+    locale,
+    preview,
+    pickCollection,
+  });
 
   return {
     posts,

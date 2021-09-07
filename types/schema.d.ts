@@ -2801,6 +2801,29 @@ export type StaffNotesSingleViewSiblingsPostsFragment = {
   title?: Maybe<string>;
 };
 
+export type GetAllCategoriesQueryVariables = Exact<{
+  locale: Scalars['String'];
+  preview?: Maybe<Scalars['Boolean']>;
+  limit?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+}>;
+
+export type GetAllCategoriesQuery = {
+  __typename?: 'Query';
+  categoryCollection?: Maybe<{
+    __typename?: 'CategoryCollection';
+    total: number;
+    items: Array<
+      Maybe<{
+        __typename?: 'Category';
+        title?: Maybe<string>;
+        slug?: Maybe<string>;
+        sys: { __typename?: 'Sys'; id: string };
+      }>
+    >;
+  }>;
+};
+
 export type NavigationStoreFragment = {
   __typename?: 'Navigation';
   menu?: Maybe<any>;
@@ -3008,6 +3031,7 @@ export type GetSiblingsStaffNotesQueryVariables = Exact<{
   locale: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   date: Scalars['DateTime'];
+  slug: Scalars['String'];
 }>;
 
 export type GetSiblingsStaffNotesQuery = {
@@ -3488,17 +3512,6 @@ export type GetStaffNotesArchiveQuery = {
           __typename?: 'HomeStaffNoteDescription';
           json: any;
         }>;
-      }>
-    >;
-  }>;
-  categoryCollection?: Maybe<{
-    __typename?: 'CategoryCollection';
-    items: Array<
-      Maybe<{
-        __typename?: 'Category';
-        title?: Maybe<string>;
-        slug?: Maybe<string>;
-        sys: { __typename?: 'Sys'; id: string };
       }>
     >;
   }>;

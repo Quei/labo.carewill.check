@@ -1,6 +1,5 @@
-import { sleep } from '@lib/sleep';
 import { nonNullableFilter } from '@lib/non-nullable-filter';
-import { fetcher } from '@lib/contentful';
+import { fetchAll } from '@lib/contentful/utils/fetch-all';
 import type { GetStaticPropsContext } from 'next';
 import type {
   GetAllStaffNotesForSitemapQuery,
@@ -47,52 +46,30 @@ const getAllCategoriesForSitemapQuery = /* GraphQL */ `
   }
 `;
 
-const fetch = async ({ query }: { query: string }) => {
-  const limit = 100;
-  let page = 0;
-  let shouldQueryMorePosts = true;
-  const posts = [];
-
-  while (shouldQueryMorePosts) {
-    const response = await fetcher<
-      GetAllStaffNotesForSitemapQuery | GetAllCategoriesForSitemapQuery
-    >({
-      query,
-      variables: {
-        limit,
-        skip: page * limit,
-      },
-      site: 'labo',
-    });
-
-    const collection =
-      'staffNoteCollection' in response
-        ? response.staffNoteCollection
-        : 'categoryCollection' in response
-        ? response.categoryCollection
-        : null;
-
-    if (collection?.items?.length) {
-      posts.push(...collection.items);
-      shouldQueryMorePosts = posts.length < collection.total;
-    } else {
-      shouldQueryMorePosts = false;
-    }
-
-    sleep(300);
-
-    page++;
+const pickCollection = <C>(
+  response: GetAllStaffNotesForSitemapQuery | GetAllCategoriesForSitemapQuery
+) => {
+  if ('staffNoteCollection' in response) {
+    return response.staffNoteCollection as C | undefined;
+  } else if ('categoryCollection' in response) {
+    return response.categoryCollection as C | undefined;
   }
-
-  return posts;
+  return null;
 };
 
 export const getDynamicPagesForSitemap = async ({
   locales,
   baseUrl,
-}: Pick<GetStaticPropsContext, 'locales'> & { baseUrl: string }) => {
-  const rawStaffNotes = await fetch({
+}: Pick<GetStaticPropsContext, 'locales'> & {
+  baseUrl: string;
+}) => {
+  const rawStaffNotes = await fetchAll<
+    GetAllStaffNotesForSitemapQuery,
+    NonNullable<GetAllStaffNotesForSitemapQuery['staffNoteCollection']>
+  >({
+    site: 'labo',
     query: getAllStaffNotesForSitemapQuery,
+    pickCollection,
   });
   const staffNotes = rawStaffNotes
     .map((item) => {
@@ -110,8 +87,13 @@ export const getDynamicPagesForSitemap = async ({
     })
     .flatMap((item) => item);
 
-  const rawCategories = await fetch({
+  const rawCategories = await fetchAll<
+    GetAllCategoriesForSitemapQuery,
+    NonNullable<GetAllCategoriesForSitemapQuery['categoryCollection']>
+  >({
+    site: 'labo',
     query: getAllCategoriesForSitemapQuery,
+    pickCollection,
   });
 
   const categories = rawCategories
