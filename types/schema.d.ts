@@ -3471,17 +3471,6 @@ export type GetStaffNotesArchiveCategoryQuery = {
       }>
     >;
   }>;
-  allCategories?: Maybe<{
-    __typename?: 'CategoryCollection';
-    items: Array<
-      Maybe<{
-        __typename?: 'Category';
-        title?: Maybe<string>;
-        slug?: Maybe<string>;
-        sys: { __typename?: 'Sys'; id: string };
-      }>
-    >;
-  }>;
 };
 
 export type GetStaffNotesArchiveCategoryPathsQueryVariables = Exact<{
