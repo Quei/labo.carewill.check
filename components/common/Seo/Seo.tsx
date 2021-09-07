@@ -23,7 +23,10 @@ const useOpenGraph = ({
   const openGraph = {
     title,
     description,
-    images: image?.url && image?.width && image?.height ? [image] : undefined,
+    images:
+      image?.url && image?.width && image?.height
+        ? [{ ...image, ...{ alt: title } }]
+        : undefined,
     url:
       locale === 'ja' ? `${baseUrl}${asPath}` : `${baseUrl}/${locale}${asPath}`,
   } as NextSeoProps['openGraph'];
