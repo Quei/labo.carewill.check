@@ -19,7 +19,7 @@ const getAllStaffNotesQuery = /* GraphQL */ `
     ) {
       total
       items {
-        ...staffNotesArchiveViewPostWithId
+        ...StaffNotesArchiveViewPostWithId
       }
     }
   }

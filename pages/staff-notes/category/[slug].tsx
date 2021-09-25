@@ -33,7 +33,7 @@ const getStaffNotesArchiveCategory = /* GraphQL */ `
       limit: 1
     ) {
       items {
-        ...staffNotesArchiveViewDescription
+        ...StaffNotesArchiveViewDescription
       }
     }
   }

@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const recruitingViewDescriptionFragment = /* GraphQL */ `
-  fragment recruitingViewDescription on Home {
+  fragment RecruitingViewDescription on Home {
     recruitingDescription {
       json
     }

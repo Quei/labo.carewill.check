@@ -33,7 +33,7 @@ const getStaffNotesSingle = /* GraphQL */ `
     ) {
       items {
         date
-        ...staffNotesSingleViewPost
+        ...StaffNotesSingleViewPost
       }
     }
   }

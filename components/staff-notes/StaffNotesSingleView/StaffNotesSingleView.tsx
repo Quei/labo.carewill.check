@@ -32,7 +32,7 @@ type Props = {
 };
 
 export const staffNotesSingleViewPostFragment = /* GraphQL */ `
-  fragment staffNotesSingleViewPost on StaffNote {
+  fragment StaffNotesSingleViewPost on StaffNote {
     date
     title
     image {
@@ -46,12 +46,12 @@ export const staffNotesSingleViewPostFragment = /* GraphQL */ `
       links {
         assets {
           block {
-            ...richTextAsset
+            ...RichTextAsset
           }
         }
         entries {
           hyperlink {
-            ...richTextEntryHyperlink
+            ...RichTextEntryHyperlink
           }
         }
       }
@@ -71,7 +71,7 @@ export const staffNotesSingleViewPostFragment = /* GraphQL */ `
 `;
 
 export const staffNotesSingleViewSiblingsPostsFragment = /* GraphQL */ `
-  fragment staffNotesSingleViewSiblingsPosts on StaffNote {
+  fragment StaffNotesSingleViewSiblingsPosts on StaffNote {
     slug
     title
   }

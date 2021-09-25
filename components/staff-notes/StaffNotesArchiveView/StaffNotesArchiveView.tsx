@@ -31,7 +31,7 @@ type Props = {
 };
 
 export const staffNotesArchiveViewDescriptionFragment = /* GraphQL */ `
-  fragment staffNotesArchiveViewDescription on Home {
+  fragment StaffNotesArchiveViewDescription on Home {
     staffNoteDescription {
       json
     }
@@ -39,17 +39,17 @@ export const staffNotesArchiveViewDescriptionFragment = /* GraphQL */ `
 `;
 
 export const staffNotesArchiveViewPostWithIdFragment = /* GraphQL */ `
-  fragment staffNotesArchiveViewPostWithId on StaffNote {
+  fragment StaffNotesArchiveViewPostWithId on StaffNote {
     sys {
       id
     }
-    ...staffNotesArchiveViewPost
+    ...StaffNotesArchiveViewPost
   }
   ${staffNotesArchiveViewPostFragment}
 `;
 
 export const staffNotesArchiveViewCategoryFragment = /* GraphQL */ `
-  fragment staffNotesArchiveViewCategory on Category {
+  fragment StaffNotesArchiveViewCategory on Category {
     sys {
       id
     }

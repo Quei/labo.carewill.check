@@ -22,7 +22,7 @@ const getStaffNotesArchive = /* GraphQL */ `
       limit: 1
     ) {
       items {
-        ...staffNotesArchiveViewDescription
+        ...StaffNotesArchiveViewDescription
       }
     }
   }

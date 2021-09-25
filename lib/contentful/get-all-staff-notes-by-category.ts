@@ -24,7 +24,7 @@ const getAllStaffNotesByCategoryQuery = /* GraphQL */ `
           staffNoteCollection(preview: $preview, limit: $limit, skip: $skip) {
             total
             items {
-              ...staffNotesArchiveViewPostWithId
+              ...StaffNotesArchiveViewPostWithId
             }
           }
         }

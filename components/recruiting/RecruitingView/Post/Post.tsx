@@ -22,7 +22,7 @@ type Props = RecruitingViewPostFragment & {
 };
 
 export const recruitingViewPostFragment = /* GraphQL */ `
-  fragment recruitingViewPost on Recruiting {
+  fragment RecruitingViewPost on Recruiting {
     slug
     title
     content {
@@ -30,12 +30,12 @@ export const recruitingViewPostFragment = /* GraphQL */ `
       links {
         assets {
           block {
-            ...richTextAsset
+            ...RichTextAsset
           }
         }
         entries {
           hyperlink {
-            ...richTextEntryHyperlink
+            ...RichTextEntryHyperlink
           }
         }
       }
@@ -47,7 +47,7 @@ export const recruitingViewPostFragment = /* GraphQL */ `
       links {
         assets {
           block {
-            ...richTextAsset
+            ...RichTextAsset
           }
         }
       }
@@ -59,7 +59,7 @@ export const recruitingViewPostFragment = /* GraphQL */ `
 `;
 
 export const recruitingViewCategoriesFragment = /* GraphQL */ `
-  fragment recruitingViewCategories on Recruiting {
+  fragment RecruitingViewCategories on Recruiting {
     sys {
       id
     }
