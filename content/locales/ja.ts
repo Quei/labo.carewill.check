@@ -42,6 +42,7 @@ export const ja: Record<string, any> = {
   ['labo.topLink']: 'Labo トップ',
   ['labo.interviews']: '取材記事',
   ['labo.interviewsPickup']: '取材記事ピックアップ',
+  ['labo.interviews.backToIndex']: '取材記事一覧へ戻る',
   ['labo.staffNotes']: 'スタッフノート',
   ['labo.recruiting']: '募集',
   ['labo.selectCategory']: 'カテゴリー',

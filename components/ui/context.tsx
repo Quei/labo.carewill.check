@@ -1,4 +1,10 @@
-import { createContext, useReducer, useMemo, useContext } from 'react';
+import {
+  createContext,
+  useReducer,
+  useMemo,
+  useContext,
+  useCallback,
+} from 'react';
 import type { FC } from 'react';
 
 export interface State {
@@ -7,17 +13,29 @@ export interface State {
     category: string,
     number: number
   ) => void;
+  interviewsArchiveShownPostsNumber: { [key: string]: number };
+  setInterviewsArchiveShownPostsNumber?: (
+    series: string,
+    number: number
+  ) => void;
 }
 
 const initialState = {
   staffNotesArchiveShownPostsNumber: {},
+  interviewsArchiveShownPostsNumber: {},
 };
 
-type Action = {
-  type: 'SET_STAFF_NOTES_ARCHIVE_SHOWN_POSTS_NUMBER';
-  category: string;
-  number: number;
-};
+type Action =
+  | {
+      type: 'SET_STAFF_NOTES_ARCHIVE_SHOWN_POSTS_NUMBER';
+      category: string;
+      number: number;
+    }
+  | {
+      type: 'SET_INTERVIEWS_ARCHIVE_SHOWN_POSTS_NUMBER';
+      series: string;
+      number: number;
+    };
 
 export const UIContext = createContext<State>(initialState);
 
@@ -34,6 +52,15 @@ function uiReducer(state: State, action: Action) {
         },
       };
     }
+    case 'SET_INTERVIEWS_ARCHIVE_SHOWN_POSTS_NUMBER': {
+      return {
+        ...state,
+        interviewsArchiveShownPostsNumber: {
+          ...state.interviewsArchiveShownPostsNumber,
+          [action.series]: action.number,
+        },
+      };
+    }
   }
 }
 
@@ -41,19 +68,38 @@ export const UIProvider: FC = (props) => {
   const [state, dispatch] = useReducer(uiReducer, initialState);
 
   const setStaffNotesArchiveShownPostsNumber: State['setStaffNotesArchiveShownPostsNumber'] =
-    (category, number) =>
-      dispatch({
-        type: 'SET_STAFF_NOTES_ARCHIVE_SHOWN_POSTS_NUMBER',
-        category,
-        number,
-      });
+    useCallback(
+      (category, number) =>
+        dispatch({
+          type: 'SET_STAFF_NOTES_ARCHIVE_SHOWN_POSTS_NUMBER',
+          category,
+          number,
+        }),
+      [dispatch]
+    );
+
+  const setInterviewsArchiveShownPostsNumber: State['setInterviewsArchiveShownPostsNumber'] =
+    useCallback(
+      (series, number) =>
+        dispatch({
+          type: 'SET_INTERVIEWS_ARCHIVE_SHOWN_POSTS_NUMBER',
+          series,
+          number,
+        }),
+      [dispatch]
+    );
 
   const value = useMemo(
     () => ({
       ...state,
       setStaffNotesArchiveShownPostsNumber,
+      setInterviewsArchiveShownPostsNumber,
     }),
-    [state]
+    [
+      state,
+      setStaffNotesArchiveShownPostsNumber,
+      setInterviewsArchiveShownPostsNumber,
+    ]
   );
 
   return <UIContext.Provider value={value} {...props} />;

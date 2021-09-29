@@ -850,6 +850,7 @@ export type Home = Entry & {
   endSlideCollection?: Maybe<AssetCollection>;
   hauteCoutureHomeDescription?: Maybe<HomeHauteCoutureHomeDescription>;
   hauteCoutureImage?: Maybe<Asset>;
+  interviewDescription?: Maybe<HomeInterviewDescription>;
   interviewHomeDescription?: Maybe<HomeInterviewHomeDescription>;
   interviewImage?: Maybe<Asset>;
   linkedFrom?: Maybe<HomeLinkingCollections>;
@@ -911,6 +912,11 @@ export type HomeHauteCoutureHomeDescriptionArgs = {
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
 export type HomeHauteCoutureImageArgs = {
   preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
+export type HomeInterviewDescriptionArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
@@ -1101,6 +1107,9 @@ export type HomeFilter = {
   hauteCoutureHomeDescription_exists?: Maybe<Scalars['Boolean']>;
   hauteCoutureHomeDescription_not_contains?: Maybe<Scalars['String']>;
   hauteCoutureImage_exists?: Maybe<Scalars['Boolean']>;
+  interviewDescription_contains?: Maybe<Scalars['String']>;
+  interviewDescription_exists?: Maybe<Scalars['Boolean']>;
+  interviewDescription_not_contains?: Maybe<Scalars['String']>;
   interviewHomeDescription_contains?: Maybe<Scalars['String']>;
   interviewHomeDescription_exists?: Maybe<Scalars['Boolean']>;
   interviewHomeDescription_not_contains?: Maybe<Scalars['String']>;
@@ -1167,6 +1176,31 @@ export type HomeHauteCoutureHomeDescriptionLinks = {
   __typename?: 'HomeHauteCoutureHomeDescriptionLinks';
   entries: HomeHauteCoutureHomeDescriptionEntries;
   assets: HomeHauteCoutureHomeDescriptionAssets;
+};
+
+export type HomeInterviewDescription = {
+  __typename?: 'HomeInterviewDescription';
+  json: Scalars['JSON'];
+  links: HomeInterviewDescriptionLinks;
+};
+
+export type HomeInterviewDescriptionAssets = {
+  __typename?: 'HomeInterviewDescriptionAssets';
+  hyperlink: Array<Maybe<Asset>>;
+  block: Array<Maybe<Asset>>;
+};
+
+export type HomeInterviewDescriptionEntries = {
+  __typename?: 'HomeInterviewDescriptionEntries';
+  inline: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  block: Array<Maybe<Entry>>;
+};
+
+export type HomeInterviewDescriptionLinks = {
+  __typename?: 'HomeInterviewDescriptionLinks';
+  entries: HomeInterviewDescriptionEntries;
+  assets: HomeInterviewDescriptionAssets;
 };
 
 export type HomeInterviewHomeDescription = {
@@ -1480,8 +1514,8 @@ export type Interview = Entry & {
   contentfulMetadata: ContentfulMetadata;
   linkedFrom?: Maybe<InterviewLinkingCollections>;
   slug?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['DateTime']>;
+  title?: Maybe<Scalars['String']>;
   series?: Maybe<InterviewSeries>;
   image?: Maybe<Asset>;
   content?: Maybe<InterviewContent>;
@@ -1499,12 +1533,12 @@ export type InterviewSlugArgs = {
 };
 
 /** [See type definition](https://app.contentful.com/spaces/8z7mw5knx30w/content_types/interview) */
-export type InterviewTitleArgs = {
+export type InterviewDateArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 /** [See type definition](https://app.contentful.com/spaces/8z7mw5knx30w/content_types/interview) */
-export type InterviewDateArgs = {
+export type InterviewTitleArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
@@ -1585,13 +1619,6 @@ export type InterviewFilter = {
   slug_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
   slug_contains?: Maybe<Scalars['String']>;
   slug_not_contains?: Maybe<Scalars['String']>;
-  title_exists?: Maybe<Scalars['Boolean']>;
-  title?: Maybe<Scalars['String']>;
-  title_not?: Maybe<Scalars['String']>;
-  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  title_contains?: Maybe<Scalars['String']>;
-  title_not_contains?: Maybe<Scalars['String']>;
   date_exists?: Maybe<Scalars['Boolean']>;
   date?: Maybe<Scalars['DateTime']>;
   date_not?: Maybe<Scalars['DateTime']>;
@@ -1601,6 +1628,13 @@ export type InterviewFilter = {
   date_gte?: Maybe<Scalars['DateTime']>;
   date_lt?: Maybe<Scalars['DateTime']>;
   date_lte?: Maybe<Scalars['DateTime']>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title?: Maybe<Scalars['String']>;
+  title_not?: Maybe<Scalars['String']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
   series_exists?: Maybe<Scalars['Boolean']>;
   image_exists?: Maybe<Scalars['Boolean']>;
   content_exists?: Maybe<Scalars['Boolean']>;
@@ -1626,10 +1660,10 @@ export type InterviewLinkingCollectionsEntryCollectionArgs = {
 export enum InterviewOrder {
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
   DateAsc = 'date_ASC',
   DateDesc = 'date_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
   SysIdAsc = 'sys_id_ASC',
   SysIdDesc = 'sys_id_DESC',
   SysPublishedAtAsc = 'sys_publishedAt_ASC',
@@ -2954,6 +2988,183 @@ export type HomeLaboLatestStaffNoteFragment = {
   content?: Maybe<{ __typename?: 'StaffNoteContent'; json: any }>;
 };
 
+export type InterviewsArchiveViewDescriptionFragment = {
+  __typename?: 'Home';
+  interviewDescription?: Maybe<{
+    __typename?: 'HomeInterviewDescription';
+    json: any;
+  }>;
+};
+
+export type InterviewsArchiveViewPostWithIdFragment = {
+  __typename?: 'InterviewSeries';
+  slug?: Maybe<string>;
+  title?: Maybe<string>;
+  description?: Maybe<string>;
+  sys: { __typename?: 'Sys'; id: string };
+  image?: Maybe<{
+    __typename?: 'Asset';
+    url?: Maybe<string>;
+    description?: Maybe<string>;
+  }>;
+};
+
+export type InterviewsArchiveViewPostFragment = {
+  __typename?: 'InterviewSeries';
+  slug?: Maybe<string>;
+  title?: Maybe<string>;
+  description?: Maybe<string>;
+  image?: Maybe<{
+    __typename?: 'Asset';
+    url?: Maybe<string>;
+    description?: Maybe<string>;
+  }>;
+};
+
+export type InterviewsSeriesArchiveViewPageFragment = {
+  __typename?: 'InterviewSeries';
+  title?: Maybe<string>;
+  description?: Maybe<string>;
+  image?: Maybe<{
+    __typename?: 'Asset';
+    url?: Maybe<string>;
+    description?: Maybe<string>;
+    width?: Maybe<number>;
+    height?: Maybe<number>;
+  }>;
+};
+
+export type InterviewsSeriesArchiveViewPostWithIdFragment = {
+  __typename?: 'Interview';
+  slug?: Maybe<string>;
+  title?: Maybe<string>;
+  date?: Maybe<any>;
+  sys: { __typename?: 'Sys'; id: string };
+  content?: Maybe<{ __typename?: 'InterviewContent'; json: any }>;
+  image?: Maybe<{
+    __typename?: 'Asset';
+    url?: Maybe<string>;
+    description?: Maybe<string>;
+  }>;
+};
+
+export type InterviewsSeriesArchiveViewPostFragment = {
+  __typename?: 'Interview';
+  slug?: Maybe<string>;
+  title?: Maybe<string>;
+  date?: Maybe<any>;
+  content?: Maybe<{ __typename?: 'InterviewContent'; json: any }>;
+  image?: Maybe<{
+    __typename?: 'Asset';
+    url?: Maybe<string>;
+    description?: Maybe<string>;
+  }>;
+};
+
+export type InterviewsSingleViewPostFragment = {
+  __typename?: 'Interview';
+  date?: Maybe<any>;
+  title?: Maybe<string>;
+  image?: Maybe<{
+    __typename?: 'Asset';
+    url?: Maybe<string>;
+    description?: Maybe<string>;
+    width?: Maybe<number>;
+    height?: Maybe<number>;
+  }>;
+  content?: Maybe<{
+    __typename?: 'InterviewContent';
+    json: any;
+    links: {
+      __typename?: 'InterviewContentLinks';
+      assets: {
+        __typename?: 'InterviewContentAssets';
+        block: Array<
+          Maybe<{
+            __typename?: 'Asset';
+            url?: Maybe<string>;
+            description?: Maybe<string>;
+            width?: Maybe<number>;
+            height?: Maybe<number>;
+            sys: { __typename?: 'Sys'; id: string };
+          }>
+        >;
+      };
+      entries: {
+        __typename?: 'InterviewContentEntries';
+        hyperlink: Array<
+          Maybe<
+            | {
+                __typename: 'Category';
+                sys: { __typename?: 'Sys'; id: string };
+              }
+            | {
+                __typename: 'CustomOrder';
+                sys: { __typename?: 'Sys'; id: string };
+              }
+            | { __typename: 'Footer'; sys: { __typename?: 'Sys'; id: string } }
+            | {
+                __typename: 'HauteCouture';
+                sys: { __typename?: 'Sys'; id: string };
+              }
+            | { __typename: 'Home'; sys: { __typename?: 'Sys'; id: string } }
+            | {
+                __typename: 'Interview';
+                sys: { __typename?: 'Sys'; id: string };
+              }
+            | {
+                __typename: 'InterviewSeries';
+                sys: { __typename?: 'Sys'; id: string };
+              }
+            | {
+                __typename: 'Navigation';
+                sys: { __typename?: 'Sys'; id: string };
+              }
+            | { __typename: 'News'; sys: { __typename?: 'Sys'; id: string } }
+            | {
+                __typename: 'NewsCategory';
+                sys: { __typename?: 'Sys'; id: string };
+              }
+            | { __typename: 'Product'; sys: { __typename?: 'Sys'; id: string } }
+            | {
+                __typename: 'Recruiting';
+                slug?: Maybe<string>;
+                sys: { __typename?: 'Sys'; id: string };
+              }
+            | {
+                __typename: 'StaffNote';
+                slug?: Maybe<string>;
+                sys: { __typename?: 'Sys'; id: string };
+              }
+          >
+        >;
+      };
+    };
+  }>;
+  categoryCollection?: Maybe<{
+    __typename?: 'InterviewCategoryCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'Category';
+        slug?: Maybe<string>;
+        title?: Maybe<string>;
+        sys: { __typename?: 'Sys'; id: string };
+      }>
+    >;
+  }>;
+  series?: Maybe<{
+    __typename?: 'InterviewSeries';
+    title?: Maybe<string>;
+    slug?: Maybe<string>;
+  }>;
+};
+
+export type InterviewsSingleViewSiblingsPostsFragment = {
+  __typename?: 'Interview';
+  slug?: Maybe<string>;
+  title?: Maybe<string>;
+};
+
 export type RecruitingViewPostFragment = {
   __typename?: 'Recruiting';
   slug?: Maybe<string>;
@@ -3433,6 +3644,38 @@ export type GetFooterQuery = {
   }>;
 };
 
+export type GetSiblingsInterviewsQueryVariables = Exact<{
+  locale: Scalars['String'];
+  preview?: Maybe<Scalars['Boolean']>;
+  date: Scalars['DateTime'];
+  slug: Scalars['String'];
+  seriesSlug: Scalars['String'];
+}>;
+
+export type GetSiblingsInterviewsQuery = {
+  __typename?: 'Query';
+  previous?: Maybe<{
+    __typename?: 'InterviewCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'Interview';
+        slug?: Maybe<string>;
+        title?: Maybe<string>;
+      }>
+    >;
+  }>;
+  next?: Maybe<{
+    __typename?: 'InterviewCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'Interview';
+        slug?: Maybe<string>;
+        title?: Maybe<string>;
+      }>
+    >;
+  }>;
+};
+
 export type GetSiblingsStaffNotesQueryVariables = Exact<{
   locale: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
@@ -3593,6 +3836,239 @@ export type GetHomeLaboQuery = {
         __typename?: 'StaffNote';
         content?: Maybe<{ __typename?: 'StaffNoteContent'; json: any }>;
       }>
+    >;
+  }>;
+};
+
+export type GetInterviewsSingleQueryVariables = Exact<{
+  locale: Scalars['String'];
+  slug: Scalars['String'];
+  preview?: Maybe<Scalars['Boolean']>;
+}>;
+
+export type GetInterviewsSingleQuery = {
+  __typename?: 'Query';
+  interviewCollection?: Maybe<{
+    __typename?: 'InterviewCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'Interview';
+        date?: Maybe<any>;
+        title?: Maybe<string>;
+        series?: Maybe<{
+          __typename?: 'InterviewSeries';
+          slug?: Maybe<string>;
+          title?: Maybe<string>;
+        }>;
+        image?: Maybe<{
+          __typename?: 'Asset';
+          url?: Maybe<string>;
+          description?: Maybe<string>;
+          width?: Maybe<number>;
+          height?: Maybe<number>;
+        }>;
+        content?: Maybe<{
+          __typename?: 'InterviewContent';
+          json: any;
+          links: {
+            __typename?: 'InterviewContentLinks';
+            assets: {
+              __typename?: 'InterviewContentAssets';
+              block: Array<
+                Maybe<{
+                  __typename?: 'Asset';
+                  url?: Maybe<string>;
+                  description?: Maybe<string>;
+                  width?: Maybe<number>;
+                  height?: Maybe<number>;
+                  sys: { __typename?: 'Sys'; id: string };
+                }>
+              >;
+            };
+            entries: {
+              __typename?: 'InterviewContentEntries';
+              hyperlink: Array<
+                Maybe<
+                  | {
+                      __typename: 'Category';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'CustomOrder';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'Footer';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'HauteCouture';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'Home';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'Interview';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'InterviewSeries';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'Navigation';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'News';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'NewsCategory';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'Product';
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'Recruiting';
+                      slug?: Maybe<string>;
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                  | {
+                      __typename: 'StaffNote';
+                      slug?: Maybe<string>;
+                      sys: { __typename?: 'Sys'; id: string };
+                    }
+                >
+              >;
+            };
+          };
+        }>;
+        categoryCollection?: Maybe<{
+          __typename?: 'InterviewCategoryCollection';
+          items: Array<
+            Maybe<{
+              __typename?: 'Category';
+              slug?: Maybe<string>;
+              title?: Maybe<string>;
+              sys: { __typename?: 'Sys'; id: string };
+            }>
+          >;
+        }>;
+      }>
+    >;
+  }>;
+};
+
+export type GetInterviewsSinglePathsQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetInterviewsSinglePathsQuery = {
+  __typename?: 'Query';
+  interviewCollection?: Maybe<{
+    __typename?: 'InterviewCollection';
+    items: Array<Maybe<{ __typename?: 'Interview'; slug?: Maybe<string> }>>;
+  }>;
+};
+
+export type GetInterviewsArchiveQueryVariables = Exact<{
+  locale: Scalars['String'];
+  preview?: Maybe<Scalars['Boolean']>;
+}>;
+
+export type GetInterviewsArchiveQuery = {
+  __typename?: 'Query';
+  homeCollection?: Maybe<{
+    __typename?: 'HomeCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'Home';
+        interviewDescription?: Maybe<{
+          __typename?: 'HomeInterviewDescription';
+          json: any;
+        }>;
+      }>
+    >;
+  }>;
+  interviewSeriesCollection?: Maybe<{
+    __typename?: 'InterviewSeriesCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'InterviewSeries';
+        slug?: Maybe<string>;
+        title?: Maybe<string>;
+        description?: Maybe<string>;
+        sys: { __typename?: 'Sys'; id: string };
+        image?: Maybe<{
+          __typename?: 'Asset';
+          url?: Maybe<string>;
+          description?: Maybe<string>;
+        }>;
+      }>
+    >;
+  }>;
+};
+
+export type GetInterviewsSeriesArchiveQueryVariables = Exact<{
+  locale: Scalars['String'];
+  preview?: Maybe<Scalars['Boolean']>;
+  slug: Scalars['String'];
+}>;
+
+export type GetInterviewsSeriesArchiveQuery = {
+  __typename?: 'Query';
+  interviewSeriesCollection?: Maybe<{
+    __typename?: 'InterviewSeriesCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'InterviewSeries';
+        title?: Maybe<string>;
+        description?: Maybe<string>;
+        image?: Maybe<{
+          __typename?: 'Asset';
+          url?: Maybe<string>;
+          description?: Maybe<string>;
+          width?: Maybe<number>;
+          height?: Maybe<number>;
+        }>;
+      }>
+    >;
+  }>;
+  interviewCollection?: Maybe<{
+    __typename?: 'InterviewCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'Interview';
+        slug?: Maybe<string>;
+        title?: Maybe<string>;
+        date?: Maybe<any>;
+        sys: { __typename?: 'Sys'; id: string };
+        content?: Maybe<{ __typename?: 'InterviewContent'; json: any }>;
+        image?: Maybe<{
+          __typename?: 'Asset';
+          url?: Maybe<string>;
+          description?: Maybe<string>;
+        }>;
+      }>
+    >;
+  }>;
+};
+
+export type GetInterviewsSeriesArchivePathsQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetInterviewsSeriesArchivePathsQuery = {
+  __typename?: 'Query';
+  interviewSeriesCollection?: Maybe<{
+    __typename?: 'InterviewSeriesCollection';
+    items: Array<
+      Maybe<{ __typename?: 'InterviewSeries'; slug?: Maybe<string> }>
     >;
   }>;
 };

@@ -1,29 +1,30 @@
 import cn from 'classnames';
-import s from './StaffNotesSingleView.module.css';
+import s from './InterviewsSingleView.module.css';
 import {
   renderRichText,
   richTextAssetFragment,
   richTextEntryHyperlinkFragment,
 } from '@lib/contentful/utils/rich-text';
+import { nonNullableFilter } from '@lib/non-nullable-filter';
 import { useIntlMessage } from '@lib/hooks/useIntlMessage';
 import { Seo, SingleView } from '@components/common';
 import { Pagination } from '@components/ui';
 import type { VFC } from 'react';
 import type {
-  StaffNotesSingleViewPostFragment,
-  StaffNotesSingleViewSiblingsPostsFragment,
+  InterviewsSingleViewPostFragment,
+  InterviewsSingleViewSiblingsPostsFragment,
 } from 'types/schema';
 
 type Props = {
-  post: StaffNotesSingleViewPostFragment;
+  post: InterviewsSingleViewPostFragment;
   siblingsPosts: {
-    previous: StaffNotesSingleViewSiblingsPostsFragment | null;
-    next: StaffNotesSingleViewSiblingsPostsFragment | null;
+    previous: InterviewsSingleViewSiblingsPostsFragment | null;
+    next: InterviewsSingleViewSiblingsPostsFragment | null;
   };
 };
 
-export const staffNotesSingleViewPostFragment = /* GraphQL */ `
-  fragment StaffNotesSingleViewPost on StaffNote {
+export const interviewsSingleViewPostFragment = /* GraphQL */ `
+  fragment InterviewsSingleViewPost on Interview {
     date
     title
     image {
@@ -56,33 +57,40 @@ export const staffNotesSingleViewPostFragment = /* GraphQL */ `
         title
       }
     }
+    series {
+      title
+      slug
+    }
   }
   ${richTextAssetFragment}
   ${richTextEntryHyperlinkFragment}
 `;
 
-export const staffNotesSingleViewSiblingsPostsFragment = /* GraphQL */ `
-  fragment StaffNotesSingleViewSiblingsPosts on StaffNote {
+export const interviewsSingleViewSiblingsPostsFragment = /* GraphQL */ `
+  fragment InterviewsSingleViewSiblingsPosts on Interview {
     slug
     title
   }
 `;
 
-const StaffNotesSingleView: VFC<Props> = ({ post, siblingsPosts }) => {
-  const { title, image, content } = post;
+const InterviewsSingleView: VFC<Props> = ({ post, siblingsPosts }) => {
+  const { title, image, content, series } = post;
   const f = useIntlMessage();
   const description = renderRichText(content, 300);
+  const seoTitle = [title, series?.title, f('labo.interviews')]
+    .filter(nonNullableFilter)
+    .join(' - ');
   return (
     <>
-      <Seo title={title ?? undefined} description={description} image={image} />
+      <Seo title={seoTitle} description={description} image={image} />
       <SingleView
-        blockTitle={f('labo.staffNotes')}
-        categoryCollectionBasePath="/staff-notes/category/"
+        blockTitle={series?.title ?? ''}
         pagination={
-          siblingsPosts && (
+          siblingsPosts &&
+          series?.slug && (
             <Pagination
-              indexLink="/staff-notes"
-              basePath="staff-notes/"
+              indexLink={`/interviews/series/${series.slug}`}
+              basePath="interviews/"
               siblingsPosts={siblingsPosts}
             />
           )
@@ -93,4 +101,4 @@ const StaffNotesSingleView: VFC<Props> = ({ post, siblingsPosts }) => {
   );
 };
 
-export default StaffNotesSingleView;
+export default InterviewsSingleView;

@@ -1,0 +1,5 @@
+.posts {
+  & > * + * {
+    @apply border-t border-green;
+  }
+}

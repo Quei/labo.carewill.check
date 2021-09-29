@@ -1,0 +1,23 @@
+.link {
+  &:hover {
+    & h2 {
+      @apply underline;
+    }
+  }
+}
+.content {
+  @screen md {
+    min-height: 100px;
+  }
+}
+.imageWrapper {
+  width: 130px;
+  height: 130px;
+  margin-top: 20px;
+  @screen md {
+    width: 100px;
+    height: 100px;
+    right: 0;
+    margin-top: 5px;
+  }
+}
