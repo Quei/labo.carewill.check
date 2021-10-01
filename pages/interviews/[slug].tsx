@@ -4,10 +4,12 @@ import {
   getSiblingsInterviews,
   getFooter,
 } from '@lib/contentful';
+import { useIsInterviewsLogin } from '@lib/hooks/useIsInterviewsLogin';
 import { Layout } from '@components/common';
 import {
   InterviewsSingleView,
   interviewsSingleViewPostFragment,
+  LoginView,
 } from '@components/interviews';
 import type {
   GetStaticPathsContext,
@@ -127,7 +129,15 @@ export default function Post({
   post,
   siblingsPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <InterviewsSingleView post={post} siblingsPosts={siblingsPosts} />;
+  const { isLoading, isLogin, setIsLogin } = useIsInterviewsLogin();
+  return (
+    <>
+      {!isLoading && !isLogin && <LoginView setIsLogin={setIsLogin} />}
+      {!isLoading && isLogin && (
+        <InterviewsSingleView post={post} siblingsPosts={siblingsPosts} />
+      )}
+    </>
+  );
 }
 
 Post.Layout = Layout;

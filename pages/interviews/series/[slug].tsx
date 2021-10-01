@@ -1,9 +1,11 @@
 import { fetcher, getAllNavigations, getFooter } from '@lib/contentful';
+import { useIsInterviewsLogin } from '@lib/hooks/useIsInterviewsLogin';
 import { Layout } from '@components/common';
 import {
   InterviewsSeriesArchiveView,
   interviewsSeriesArchiveViewPageFragment,
   interviewsSeriesArchiveViewPostWithIdFragment,
+  LoginView,
 } from '@components/interviews';
 import type {
   GetStaticPropsContext,
@@ -121,9 +123,13 @@ export default function Posts({
   series,
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { isLoading, isLogin, setIsLogin } = useIsInterviewsLogin();
   return (
     <>
-      <InterviewsSeriesArchiveView series={series} posts={posts} />
+      {!isLoading && !isLogin && <LoginView setIsLogin={setIsLogin} />}
+      {!isLoading && isLogin && (
+        <InterviewsSeriesArchiveView series={series} posts={posts} />
+      )}
     </>
   );
 }

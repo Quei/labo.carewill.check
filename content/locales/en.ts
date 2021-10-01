@@ -50,6 +50,7 @@ export const en: Record<string, any> = {
   ['labo.staffNotes']: 'Staff notes',
   ['labo.recruiting']: 'Recruiting',
   ['labo.selectCategory']: 'Category',
+  ['labo.wrongPassword']: 'Incorrect password.',
   // about-us
   ['about.topLink']: 'About us top',
   ['about.newsPickup']: 'News pickup',

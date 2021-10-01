@@ -13,3 +13,4 @@ export {
   interviewsSeriesArchiveViewPageFragment,
   interviewsSeriesArchiveViewPostWithIdFragment,
 } from './InterviewsSeriesArchiveView';
+export { default as LoginView } from './LoginView';

@@ -46,6 +46,7 @@ export const ja: Record<string, any> = {
   ['labo.staffNotes']: 'スタッフノート',
   ['labo.recruiting']: '募集',
   ['labo.selectCategory']: 'カテゴリー',
+  ['labo.wrongPassword']: 'パスワードが間違っています',
   // about
   ['about.topLink']: 'About us トップ',
   ['about.newsPickup']: 'ニュースピックアップ',
