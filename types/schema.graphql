@@ -662,6 +662,12 @@ type Home implements Entry {
   interviewDescription(locale: String): HomeInterviewDescription
   interviewHomeDescription(locale: String): HomeInterviewHomeDescription
   interviewImage(preview: Boolean, locale: String): Asset
+  interviewPickupCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): HomeInterviewPickupCollection
   linkedFrom(allowedLocales: [String]): HomeLinkingCollections
   newsPickupCollection(
     skip: Int = 0
@@ -785,6 +791,7 @@ input HomeFilter {
   interviewHomeDescription_exists: Boolean
   interviewHomeDescription_not_contains: String
   interviewImage_exists: Boolean
+  interviewPickupCollection_exists: Boolean
   newsPickupCollection_exists: Boolean
   productDescription_contains: String
   productDescription_exists: Boolean
@@ -885,6 +892,13 @@ type HomeInterviewHomeDescriptionEntries {
 type HomeInterviewHomeDescriptionLinks {
   entries: HomeInterviewHomeDescriptionEntries!
   assets: HomeInterviewHomeDescriptionAssets!
+}
+
+type HomeInterviewPickupCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Interview]!
 }
 
 type HomeLinkingCollections {
@@ -1312,6 +1326,12 @@ type InterviewLinkingCollections {
     preview: Boolean
     locale: String
   ): EntryCollection
+  homeCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): HomeCollection
 }
 
 enum InterviewOrder {

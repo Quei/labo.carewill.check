@@ -853,6 +853,7 @@ export type Home = Entry & {
   interviewDescription?: Maybe<HomeInterviewDescription>;
   interviewHomeDescription?: Maybe<HomeInterviewHomeDescription>;
   interviewImage?: Maybe<Asset>;
+  interviewPickupCollection?: Maybe<HomeInterviewPickupCollection>;
   linkedFrom?: Maybe<HomeLinkingCollections>;
   newsPickupCollection?: Maybe<HomeNewsPickupCollection>;
   productDescription?: Maybe<HomeProductDescription>;
@@ -927,6 +928,14 @@ export type HomeInterviewHomeDescriptionArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
 export type HomeInterviewImageArgs = {
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/pdt7v3ruuhi4/content_types/home) */
+export type HomeInterviewPickupCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
@@ -1114,6 +1123,7 @@ export type HomeFilter = {
   interviewHomeDescription_exists?: Maybe<Scalars['Boolean']>;
   interviewHomeDescription_not_contains?: Maybe<Scalars['String']>;
   interviewImage_exists?: Maybe<Scalars['Boolean']>;
+  interviewPickupCollection_exists?: Maybe<Scalars['Boolean']>;
   newsPickupCollection_exists?: Maybe<Scalars['Boolean']>;
   productDescription_contains?: Maybe<Scalars['String']>;
   productDescription_exists?: Maybe<Scalars['Boolean']>;
@@ -1226,6 +1236,14 @@ export type HomeInterviewHomeDescriptionLinks = {
   __typename?: 'HomeInterviewHomeDescriptionLinks';
   entries: HomeInterviewHomeDescriptionEntries;
   assets: HomeInterviewHomeDescriptionAssets;
+};
+
+export type HomeInterviewPickupCollection = {
+  __typename?: 'HomeInterviewPickupCollection';
+  total: Scalars['Int'];
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+  items: Array<Maybe<Interview>>;
 };
 
 export type HomeLinkingCollections = {
@@ -1648,9 +1666,17 @@ export type InterviewFilter = {
 export type InterviewLinkingCollections = {
   __typename?: 'InterviewLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  homeCollection?: Maybe<HomeCollection>;
 };
 
 export type InterviewLinkingCollectionsEntryCollectionArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type InterviewLinkingCollectionsHomeCollectionArgs = {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
@@ -2964,6 +2990,20 @@ export type FooterItemFragment = {
   }>;
 };
 
+export type HomeLaboInterviewPickupFragment = {
+  __typename?: 'Interview';
+  slug?: Maybe<string>;
+  title?: Maybe<string>;
+  date?: Maybe<any>;
+  sys: { __typename?: 'Sys'; id: string };
+  content?: Maybe<{ __typename?: 'InterviewContent'; json: any }>;
+  image?: Maybe<{
+    __typename?: 'Asset';
+    url?: Maybe<string>;
+    description?: Maybe<string>;
+  }>;
+};
+
 export type HomeLaboViewFragment = {
   __typename?: 'Home';
   description?: Maybe<{ __typename?: 'HomeDescription'; json: any }>;
@@ -2971,6 +3011,24 @@ export type HomeLaboViewFragment = {
   interviewHomeDescription?: Maybe<{
     __typename?: 'HomeInterviewHomeDescription';
     json: any;
+  }>;
+  interviewPickupCollection?: Maybe<{
+    __typename?: 'HomeInterviewPickupCollection';
+    items: Array<
+      Maybe<{
+        __typename?: 'Interview';
+        slug?: Maybe<string>;
+        title?: Maybe<string>;
+        date?: Maybe<any>;
+        sys: { __typename?: 'Sys'; id: string };
+        content?: Maybe<{ __typename?: 'InterviewContent'; json: any }>;
+        image?: Maybe<{
+          __typename?: 'Asset';
+          url?: Maybe<string>;
+          description?: Maybe<string>;
+        }>;
+      }>
+    >;
   }>;
   staffNoteHomeDescription?: Maybe<{
     __typename?: 'HomeStaffNoteHomeDescription';
@@ -3816,6 +3874,24 @@ export type GetHomeLaboQuery = {
         interviewHomeDescription?: Maybe<{
           __typename?: 'HomeInterviewHomeDescription';
           json: any;
+        }>;
+        interviewPickupCollection?: Maybe<{
+          __typename?: 'HomeInterviewPickupCollection';
+          items: Array<
+            Maybe<{
+              __typename?: 'Interview';
+              slug?: Maybe<string>;
+              title?: Maybe<string>;
+              date?: Maybe<any>;
+              sys: { __typename?: 'Sys'; id: string };
+              content?: Maybe<{ __typename?: 'InterviewContent'; json: any }>;
+              image?: Maybe<{
+                __typename?: 'Asset';
+                url?: Maybe<string>;
+                description?: Maybe<string>;
+              }>;
+            }>
+          >;
         }>;
         staffNoteHomeDescription?: Maybe<{
           __typename?: 'HomeStaffNoteHomeDescription';
