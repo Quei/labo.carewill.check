@@ -29,7 +29,7 @@ const getRecruitingSingle = /* GraphQL */ `
       limit: 1
     ) {
       items {
-        ...recruitingViewDescription
+        ...RecruitingViewDescription
       }
     }
     recruitingCollection(
@@ -39,7 +39,7 @@ const getRecruitingSingle = /* GraphQL */ `
       limit: 1
     ) {
       items {
-        ...recruitingViewPost
+        ...RecruitingViewPost
       }
     }
     recruitingAllPosts: recruitingCollection(
@@ -47,7 +47,7 @@ const getRecruitingSingle = /* GraphQL */ `
       preview: $preview
     ) {
       items {
-        ...recruitingViewCategories
+        ...RecruitingViewCategories
       }
     }
   }

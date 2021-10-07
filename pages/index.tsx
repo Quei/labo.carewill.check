@@ -21,7 +21,7 @@ const getHomeLaboQuery = /* GraphQL */ `
       limit: 1
     ) {
       items {
-        ...homeLaboView
+        ...HomeLaboView
       }
     }
     staffNoteCollection(
@@ -31,7 +31,7 @@ const getHomeLaboQuery = /* GraphQL */ `
       limit: 1
     ) {
       items {
-        ...homeLaboLatestStaffNote
+        ...HomeLaboLatestStaffNote
       }
     }
   }

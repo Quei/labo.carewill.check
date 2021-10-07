@@ -3,7 +3,6 @@ import cn from 'classnames';
 import s from './SiteHeader.module.css';
 import { SiteHeaderNavigation } from '@components/common';
 import { Logo, Link } from '@components/ui';
-import { SiteHeaderRoot } from './SiteHeaderRoot';
 import type { VFC } from 'react';
 import type { AllNavigations } from 'types/all-navigations';
 
@@ -13,19 +12,19 @@ type Props = {
   allNavigations?: AllNavigations;
 };
 
-const useMenu = () => {
-  const [hasShownMenu, setHasShowMenu] = useState(false);
-  const toggleMenu = useCallback(() => {
-    setHasShowMenu((value) => !value);
-  }, []);
-  return { hasShownMenu, toggleMenu };
-};
-
 const SiteHeader: VFC<Props> = ({ isSiteRoot, allNavigations }) => {
   const SmallLogo = isSiteRoot ? 'p' : 'h1';
-  const { hasShownMenu, toggleMenu } = useMenu();
   return (
-    <SiteHeaderRoot>
+    <header
+      className={cn(
+        'sticky',
+        'top-0',
+        'bg-white',
+        'z-40',
+        'border-b',
+        'border-green'
+      )}
+    >
       <div className={cn(s.innerRoot)}>
         <div className={cn(s.stickySentinel)} />
         <SmallLogo className={cn(s.smallLogo, s.hasShownSmallLogo)}>
@@ -43,7 +42,7 @@ const SiteHeader: VFC<Props> = ({ isSiteRoot, allNavigations }) => {
       {/* <I18nWidget /> */}
       {/* <UserNav /> */}
       {/* </div> */}
-    </SiteHeaderRoot>
+    </header>
   );
 };
 

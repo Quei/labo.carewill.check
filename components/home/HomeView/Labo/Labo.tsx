@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import s from './Labo.module.css';
+import { nonNullableFilter } from '@lib/non-nullable-filter';
 import { useIntlMessage } from '@lib/hooks/useIntlMessage';
 import {
   renderRichText,
@@ -12,7 +13,10 @@ import {
   BlockContentPickupLarge,
 } from '@components/ui';
 import { Section } from '../Section';
-import { Pickup } from './Pickup';
+import {
+  InterviewPickup,
+  homeLaboInterviewPickupFragment,
+} from './InterviewPickup';
 import type { VFC } from 'react';
 import type {
   HomeLaboViewFragment,
@@ -27,7 +31,7 @@ export type Props = HomeLaboViewFragment & {
 };
 
 export const homeLaboViewFragment = /* GraphQL */ `
-  fragment homeLaboView on Home {
+  fragment HomeLaboView on Home {
     description {
       json
     }
@@ -36,6 +40,11 @@ export const homeLaboViewFragment = /* GraphQL */ `
     }
     interviewHomeDescription {
       json
+    }
+    interviewPickupCollection {
+      items {
+        ...HomeLaboInterviewPickup
+      }
     }
     staffNoteHomeDescription {
       json
@@ -47,10 +56,12 @@ export const homeLaboViewFragment = /* GraphQL */ `
       json
     }
   }
+
+  ${homeLaboInterviewPickupFragment}
 `;
 
 export const homeLaboLatestStaffNoteFragment = /* GraphQL */ `
-  fragment homeLaboLatestStaffNote on StaffNote {
+  fragment HomeLaboLatestStaffNote on StaffNote {
     content {
       json
     }
@@ -58,16 +69,18 @@ export const homeLaboLatestStaffNoteFragment = /* GraphQL */ `
 `;
 
 const Labo: VFC<Props> = ({
-  className,
   description,
   interviewImage,
   interviewHomeDescription,
+  interviewPickupCollection,
   staffNoteHomeDescription,
   recruitingImage,
   recruitingHomeDescription,
   latestStaffNote,
 }) => {
   const f = useIntlMessage();
+  const interviewPickupNonNullalbeCollectionItems =
+    interviewPickupCollection?.items?.filter(nonNullableFilter);
   return (
     <Section title={'Labo'} description={renderRichTextReact(description)}>
       <Grid>
@@ -113,7 +126,10 @@ const Labo: VFC<Props> = ({
           </BlockContent>
         </Block>
       </Grid>
-      {/* <Pickup title={f('labo.interviewsPickup')} site={SITE} /> */}
+      {/* {interviewPickupNonNullalbeCollectionItems &&
+        interviewPickupNonNullalbeCollectionItems.length > 0 && (
+          <InterviewPickup items={interviewPickupNonNullalbeCollectionItems} />
+        )} */}
       <section>
         <Block
           title={f('labo.recruiting')}

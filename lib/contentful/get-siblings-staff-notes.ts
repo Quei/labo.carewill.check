@@ -18,7 +18,7 @@ const getSiblingsStaffNotesQuery = /* GraphQL */ `
       where: { date_lte: $date, slug_not: $slug }
     ) {
       items {
-        ...staffNotesSingleViewSiblingsPosts
+        ...StaffNotesSingleViewSiblingsPosts
       }
     }
     next: staffNoteCollection(
@@ -29,7 +29,7 @@ const getSiblingsStaffNotesQuery = /* GraphQL */ `
       where: { date_gte: $date, slug_not: $slug }
     ) {
       items {
-        ...staffNotesSingleViewSiblingsPosts
+        ...StaffNotesSingleViewSiblingsPosts
       }
     }
   }

@@ -12,7 +12,7 @@ type Props = StaffNotesArchiveViewPostFragment & {
 };
 
 export const staffNotesArchiveViewPostFragment = /* GraphQL */ `
-  fragment staffNotesArchiveViewPost on StaffNote {
+  fragment StaffNotesArchiveViewPost on StaffNote {
     slug
     title
     date

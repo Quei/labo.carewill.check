@@ -18,6 +18,6 @@ export { default as PickupSection } from './PickupSection';
 export { default as Categories } from './Categories';
 export { default as ShareButtons } from './ShareButtons';
 export { default as Pagination } from './Pagination';
-export { default as PlusButton } from './PlusButton';
+export { default as PlusMark } from './PlusMark';
 export { default as MorePostsButton } from './MorePostsButton';
 export { default as ScrollerToTop } from './ScrollerToTop';

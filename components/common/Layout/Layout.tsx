@@ -7,12 +7,12 @@ import { SiteHeader, SiteFooter } from '@components/common';
 import { ja as localeContentJa, en as localeContentEn } from '@content/locales';
 import type { FC } from 'react';
 import type { AllNavigations } from 'types/all-navigations';
-import type { FooterFragment } from 'types/schema';
+import type { FooterItemFragment } from 'types/schema';
 
 interface Props {
   pageProps: {
     allNavigations: AllNavigations;
-    footer?: FooterFragment;
+    footer?: FooterItemFragment;
     isSiteRoot?: boolean;
   };
 }

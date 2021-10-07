@@ -19,7 +19,7 @@ const getAllCategoriesQuery = /* GraphQL */ `
     ) {
       total
       items {
-        ...staffNotesArchiveViewCategory
+        ...StaffNotesArchiveViewCategory
       }
     }
   }

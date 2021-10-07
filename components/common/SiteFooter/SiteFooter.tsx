@@ -12,16 +12,16 @@ import { Container, Link, ScrollerToTop } from '@components/ui';
 import { Sns } from './Sns';
 import type { FC } from 'react';
 import type { AllNavigations } from 'types/all-navigations';
-import type { FooterFragment } from 'types/schema';
+import type { FooterItemFragment } from 'types/schema';
 
-type Props = FooterFragment & {
+type Props = FooterItemFragment & {
   className?: string;
   children?: any;
   allNavigations?: AllNavigations;
 };
 
 export const footerFragment = /* GraphQL */ `
-  fragment footer on Footer {
+  fragment FooterItem on Footer {
     content
     logoCollection {
       items {

@@ -7,3 +7,4 @@ export { default as I18nWidget } from './I18nWidget';
 export { default as SiteHeaderNavigation } from './SiteHeaderNavigation';
 export { default as SiteMenuList } from './SiteMenuList';
 export { default as Seo } from './Seo';
+export { default as SingleView } from './labo/SingleView';

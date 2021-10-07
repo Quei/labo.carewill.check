@@ -1,0 +1,21 @@
+.title {
+  margin-top: 20px;
+  @screen md {
+    margin-top: 0;
+  }
+}
+
+.image {
+  margin-top: 30px;
+}
+
+.content {
+  margin-top: 50px;
+  & > * + * {
+    margin-top: 1.5em;
+  }
+
+  & h2 {
+    @apply text-base md:text-lg;
+  }
+}
