@@ -126,10 +126,10 @@ const Labo: VFC<Props> = ({
           </BlockContent>
         </Block>
       </Grid>
-      {interviewPickupNonNullalbeCollectionItems &&
+      {/* {interviewPickupNonNullalbeCollectionItems &&
         interviewPickupNonNullalbeCollectionItems.length > 0 && (
           <InterviewPickup items={interviewPickupNonNullalbeCollectionItems} />
-        )}
+        )} */}
       <section>
         <Block
           title={f('labo.recruiting')}
