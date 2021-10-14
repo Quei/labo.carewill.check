@@ -6,8 +6,8 @@ import { useIntlMessage } from '@lib/hooks/useIntlMessage';
 import {
   renderRichTextReact,
   richTextAssetFragment,
-  richTextEntryHyperlinkFragment,
 } from '@lib/contentful/utils/rich-text';
+import { richTextEntryHyperlinkFragment } from '@lib/contentful/utils/labo/rich-text-fragment';
 import { Block, Container, Categories, Link } from '@components/ui';
 import type { VFC } from 'react';
 import type {
