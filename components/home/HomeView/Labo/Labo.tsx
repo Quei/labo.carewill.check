@@ -88,15 +88,11 @@ const Labo: VFC<Props> = ({
           <Block
             title={f('labo.interviews')}
             titleTag="h3"
-            href="https://www.makuake.com/project/carewill/"
           >
             <BlockContent
               image={{ src: interviewImage.url, alt: f('store.product') }}
             >
               {renderRichTextReact(interviewHomeDescription)}
-              <p>
-                <span className={cn('underline')}>{f('makuakeLink')}</span>
-              </p>
             </BlockContent>
           </Block>
         )}

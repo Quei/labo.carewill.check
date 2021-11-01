@@ -22,7 +22,8 @@
     @apply block w-0 overflow-hidden flex-none md:py-0;
     &.hasShownSmallLogo {
       @apply duration-100 md:pl-site-vertical-md;
-      width: 25%;
+      width: 18%;
+      min-width: 200px;
     }
     & a {
       @apply absolute;

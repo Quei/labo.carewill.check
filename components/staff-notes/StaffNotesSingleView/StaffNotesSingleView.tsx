@@ -3,8 +3,8 @@ import s from './StaffNotesSingleView.module.css';
 import {
   renderRichText,
   richTextAssetFragment,
-  richTextEntryHyperlinkFragment,
 } from '@lib/contentful/utils/rich-text';
+import { richTextEntryHyperlinkFragment } from '@lib/contentful/utils/labo/rich-text-fragment';
 import { useIntlMessage } from '@lib/hooks/useIntlMessage';
 import { Seo, SingleView } from '@components/common';
 import { Pagination } from '@components/ui';
